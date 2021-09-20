@@ -1,0 +1,12 @@
+.logo {
+  background-image: url(../../images/logo.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  max-width: 173px;
+  min-width: 126px;
+  min-height: 33px;
+  width: calc(100% / 2);
+  height: calc(100% / 2);
+  margin-bottom: 41px;
+}
