@@ -1,0 +1,17 @@
+.root__page {
+  max-width: 1280px;
+  min-width: 320px;
+  margin: 0 auto;
+  position: relative;
+  /* font-family: 'Inter', Arial, Helvetica, sans-serif; */
+  color: #fff;
+  min-height: 100vh;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
