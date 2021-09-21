@@ -7,4 +7,6 @@
   max-width: 373px;
   margin: 0;
   padding: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

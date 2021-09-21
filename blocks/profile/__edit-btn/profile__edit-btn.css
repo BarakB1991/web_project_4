@@ -6,13 +6,14 @@
   height: 24px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
   background-image: url('../../../images/Edit-pen.svg');
   cursor: pointer;
   background-position: center;
   background-repeat: no-repeat;
   background-color: transparent;
   padding: 0;
+}
+
+.profile__edit-btn:hover {
+  opacity: 0.6;
 }

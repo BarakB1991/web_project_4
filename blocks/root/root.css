@@ -1,12 +1,10 @@
 .root {
   background-color: #000;
   margin: 0 auto;
-    max-width: 1280px;
+  max-width: 1280px;
   min-width: 320px;
   position: relative;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
-  -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
   white-space: nowrap;
   color: #fff;
   min-height: 100vh;
@@ -18,3 +16,4 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
+}
