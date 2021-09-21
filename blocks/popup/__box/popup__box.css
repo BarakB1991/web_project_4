@@ -1,0 +1,10 @@
+.popup__box {
+  border-radius: 10px;
+  background-color: #fff;
+  min-width: 430px;
+  display: flex;
+  flex-direction: column;
+  padding: 34px 36px 36px;
+  position: relative;
+  box-sizing: border-box;
+}

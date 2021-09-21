@@ -9,6 +9,17 @@
   </head>
   <body class="root">
     <div class="wrapper">
+      <section class="popup">
+        <div class="popup__box">
+          <button type="button" class="popup__close-btn"></button>
+          <h3 class="popup__title">Edit Profile</h3>
+          <form class="popup__form" name="register">
+            <input type="text" name="name" placeholder="Full Name" class="popup__name form__text-input" />
+            <input type="text" name="profession" placeholder="Profession" class="popup__profession form__text-input" />
+            <button type="submit" class="popup__submit-btn">Save</button>
+          </form>
+        </div>
+      </section>
       <header class="header">
         <img src="./images/logo.svg" alt="Around The U.S. Logo" class="logo" />
       </header>
@@ -24,6 +35,7 @@
           </div>
           <button class="profile__add-btn"></button>
         </section>
+
         <section class="cards">
           <div class="card">
             <img src="./images/card-img1.jpg" alt="Card image" class="card__img" />
@@ -70,5 +82,6 @@
         </section>
       </main>
     </div>
+    <script src="./pages/script.js"></script>
   </body>
 </html>
