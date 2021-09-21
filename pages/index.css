@@ -7,15 +7,15 @@
 
 @import url(../blocks/header/header.css);
 @import url(../blocks/logo/logo.css);
-@import url(../blocks/header/__link-container/header__link-container.css);
 
-/*@import url(../blocks/lead/lead.css);
-@import url(../blocks/lead/__title/lead__title.css);
-@import url(../blocks/lead/__subtitle/lead__subtitle.css);
-@import url(../blocks/lead/__image/lead__image.css);
-@import url(../blocks/lead/__caption/lead__caption.css);
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__img/profile__img.css);
+@import url(../blocks/profile/__desc/profile__desc.css);
+@import url(../blocks/profile/__name/profile__name.css);
+@import url(../blocks/profile/__about/profile__about.css);
+@import url(../blocks/profile/__edit-btn/profile__edit-btn.css);
 
-@import url(../blocks/intro/intro.css);
+/*@import url(../blocks/intro/intro.css);
 @import url(../blocks/intro/__title/intro__title.css);
 @import url(../blocks/intro/__subtitle/intro__subtitle.css);
 @import url(../blocks/intro/__text/intro__text.css);
