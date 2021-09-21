@@ -1,0 +1,15 @@
+.profile__add-btn {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 150px;
+  height: 50px;
+  border: 1px solid #fff;
+  display: block;
+  background-image: url('../../../images/Add-plus.svg');
+  cursor: pointer;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  padding: 0;
+  align-self: center;
+}
