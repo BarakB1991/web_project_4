@@ -2,6 +2,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-color: transparent;
+  cursor: pointer;
   font-family: 'Inter';
   border-style: none;
   width: 358px;
@@ -15,4 +16,15 @@
   justify-self: center;
   align-self: center;
   padding: 0;
+}
+
+.popup__submit-btn:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 600px) {
+  .popup__submit-btn {
+    width: 238px;
+    height: 46px;
+  }
 }
