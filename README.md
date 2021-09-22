@@ -1,16 +1,27 @@
 # Project 4: Around The U.S.
 
-### Overview
+A project made during the Practicum100 Web Dev course.
 
-* Figma
-* Images
+This project shows images uploaded to server by the user.
 
-**Figma**
+## Table of content
 
-* [Link to the project in Figma](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
+- Description and functions
+- Later additions
+- Technologies and techniques used
+- Link to project
 
-**Images**
+### Description and functions
 
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
+The webpage contains a profile, which it's name and profession can be changed via a popup form, by a click of a button.
 
-Have fun with JavaScript!
+### Later additions
+
+The like button, and image button, will become available for interactiveness, and editing via site.
+
+### Technologies and techniques used
+
+Used BEM methodology for organizing, so to keep the code tidy and readable. This is a responsive site for every display
+HTML, CSS and Vanilla JS was used for this project.
+
+### [Link to the project hosted on Github Pages](https://barakb1991.github.io/web_project_4/)
