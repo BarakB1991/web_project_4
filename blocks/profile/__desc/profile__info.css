@@ -4,3 +4,9 @@
   margin-right: auto;
   flex-direction: column;
 }
+
+@media screen and (max-width: 920px) {
+  .profile__info {
+    margin: 0;
+  }
+}

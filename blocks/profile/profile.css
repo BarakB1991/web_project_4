@@ -3,8 +3,16 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
   flex-direction: row;
+}
+
+@media screen and (max-width: 920px) {
+  .profile {
+    margin: 38px 0 0;
+    flex-direction: column;
+    align-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+    align-items: center;
+  }
 }
