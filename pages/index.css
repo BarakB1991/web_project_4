@@ -2,6 +2,8 @@
 @import url(../vendor/fonts/inter/inter.css);
 @import url(../blocks/root/root.css);
 
+@import url(../blocks/text-input/text-input.css);
+
 @import url(../blocks/wrapper/wrapper.css);
 
 @import url(../blocks/popup/popup.css);
@@ -13,8 +15,6 @@
 @import url(../blocks/popup/__name/popup__name.css);
 @import url(../blocks/popup/__profession/popup__profession.css);
 @import url(../blocks/popup/__submit-btn/popup__submit-btn.css);
-
-@import url(../blocks/form/__text-input/form__text-input.css);
 
 @import url(../blocks/header/header.css);
 @import url(../blocks/logo/logo.css);
