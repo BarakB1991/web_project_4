@@ -1,4 +1,4 @@
-.popup_type_text-input {
+.popup__input {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   font-size: 14px;
@@ -11,28 +11,28 @@
   margin-top: 18px;
 }
 
-.popup_type_text-input::placeholder {
+.popup__input::placeholder {
   color: #000;
   opacity: 1;
 }
 
-.popup_type_text-input:focus-visible {
+.popup__input:focus-visible {
   outline-style: auto;
   outline-color: rgb(39, 130, 190);
   outline-width: 2px;
 }
 
-.popup_type_text-input:last-of-type {
+.popup__input:last-of-type {
   margin-bottom: 50px;
 }
 
 @media screen and (max-width: 600px) {
-  .popup_type_text-input {
+  .popup__input {
     padding-bottom: 9px;
     margin-top: 18px;
   }
 
-  .popup_type_text-input:last-of-type {
+  .popup__input:last-of-type {
     margin-bottom: 46px;
   }
 }

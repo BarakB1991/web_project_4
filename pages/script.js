@@ -7,8 +7,8 @@ let popupBox = document.querySelector('.popup');
 let closeForm = popupBox.querySelector('.popup__close-btn');
 
 let formElement = popupBox.querySelector('.popup__form');
-let nameInput = formElement.querySelector('.popup__name');
-let professionInput = formElement.querySelector('.popup__profession');
+let nameInput = formElement.querySelector('#input-name');
+let professionInput = formElement.querySelector('#input-profession');
 
 let submitForm = formElement.querySelector('.popup__submit-btn');
 
@@ -28,4 +28,4 @@ function formHandler(evt) {
   popupBox.classList.toggle('popup_visible');
 }
 
-submitForm.addEventListener('click', formHandler);
+submitForm.addEventListener('submit', formHandler);
