@@ -2,7 +2,7 @@
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
   border-style: none;
   width: 358px;
   height: 50px;
@@ -25,5 +25,6 @@
   .popup__submit-btn {
     width: 238px;
     height: 46px;
+    font-size: 14px;
   }
 }
