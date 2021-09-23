@@ -9,17 +9,6 @@
   </head>
   <body class="root">
     <div class="wrapper">
-      <section class="popup">
-        <div class="popup__box">
-          <button type="button" class="popup__close-btn"></button>
-          <h3 class="popup__title">Edit Profile</h3>
-          <form class="popup__form" name="register">
-            <input type="text" name="name" placeholder="Full Name" class="popup__name text-input" />
-            <input type="text" name="profession" placeholder="Profession" class="popup__profession text-input" />
-            <button type="submit" class="popup__submit-btn">Save</button>
-          </form>
-        </div>
-      </section>
       <header class="header">
         <img src="./images/Logo.svg" alt="Around The U.S. Logo" class="logo" />
       </header>
@@ -29,11 +18,11 @@
           <div class="profile__info">
             <div class="profile__header">
               <h1 class="profile__name">Abraham Lincoln</h1>
-              <button class="profile__edit-btn"></button>
+              <button type="button" aria-label="Edit Profile" class="profile__edit-btn"></button>
             </div>
             <p class="profile__about">A Founding Father</p>
           </div>
-          <button class="profile__add-btn"></button>
+          <button type="button" aria-label="Add Image" class="profile__add-btn"></button>
         </section>
         <section class="cards">
           <ul class="cards__list">
@@ -41,42 +30,42 @@
               <img src="./images/card-img1.jpg" alt="Card image" class="card__img" />
               <div class="card__info">
                 <h2 class="card__title">Yosemite Valley</h2>
-                <button type="button" class="card__like-btn card__like-btn_active"></button>
+                <button type="button" aria-label="Like" class="card__like-btn card__like-btn_active"></button>
               </div>
             </li>
             <li class="card">
               <img src="./images/card-img2.png" alt="Card image" class="card__img" />
               <div class="card__info">
                 <h2 class="card__title">Lake Louise</h2>
-                <button type="button" class="card__like-btn"></button>
+                <button type="button" aria-label="Like" class="card__like-btn"></button>
               </div>
             </li>
             <li class="card">
               <img src="./images/card-img3.png" alt="Card image" class="card__img" />
               <div class="card__info">
                 <h2 class="card__title">Bald Mountains</h2>
-                <button type="button" class="card__like-btn"></button>
+                <button type="button" aria-label="Like" class="card__like-btn"></button>
               </div>
             </li>
             <li class="card">
               <img src="./images/card-img4.png" alt="Card image" class="card__img" />
               <div class="card__info">
                 <h2 class="card__title">Latemar</h2>
-                <button type="button" class="card__like-btn"></button>
+                <button type="button" aria-label="Like" class="card__like-btn"></button>
               </div>
             </li>
             <li class="card">
               <img src="./images/card-img5.png" alt="Card image" class="card__img" />
               <div class="card__info">
                 <h2 class="card__title">Vanoise National Park</h2>
-                <button type="button" class="card__like-btn"></button>
+                <button type="button" aria-label="Like" class="card__like-btn"></button>
               </div>
             </li>
             <li class="card">
               <img src="./images/card-img6.png" alt="Card image" class="card__img" />
               <div class="card__info">
                 <h2 class="card__title">Lago di Braies</h2>
-                <button type="button" class="card__like-btn"></button>
+                <button type="button" aria-label="Like" class="card__like-btn"></button>
               </div>
             </li>
           </ul>
@@ -85,6 +74,17 @@
       <footer class="footer">
         <p class="footer__heading">© 2021 Around The U.S.</p>
       </footer>
+      <section class="popup">
+        <div class="popup__box">
+          <button type="button" aria-label="Close" class="popup__close-btn"></button>
+          <h3 class="popup__title">Edit Profile</h3>
+          <form class="popup__form" name="register">
+            <input type="text" name="name" placeholder="Full Name" class="popup__name text-input" required />
+            <input type="text" name="profession" placeholder="Profession" class="popup__profession text-input" required />
+            <button type="submit" aria-label="Submit" class="popup__submit-btn">Save</button>
+          </form>
+        </div>
+      </section>
     </div>
     <script src="./pages/script.js"></script>
   </body>
