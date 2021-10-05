@@ -28,14 +28,19 @@ const initialCards = [
 ];
 
 function createCard(card) {
-  // grabbing template and copying .card node
+  // grabbing template and cloning .card node
   const cardTemplate = document.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-
   const cardTitleElement = cardElement.querySelector('.card__title');
   const cardLinkElement = cardElement.querySelector('.card__img');
   cardTitleElement.textContent = card.name;
   cardLinkElement.src = card.link;
+  // click like
+  const clickLike = cardElement.querySelector('.card__like-btn');
+  clickLike.addEventListener('click', function (evt) {
+    evt.target.classList.toggle('card__like-btn_active');
+  });
+
   return cardElement;
 }
 
@@ -46,36 +51,60 @@ initialCards.forEach(card => {
   cardsContainer.append(cardElement);
 });
 
-// popup
-let profileContainer = document.querySelector('.profile');
-let profileName = profileContainer.querySelector('.profile__name');
-let profileProfession = profileContainer.querySelector('.profile__about');
-let profileEditButton = profileContainer.querySelector('.profile__edit-btn');
+// forms
+const profileContainer = document.querySelector('.profile');
+const profileName = profileContainer.querySelector('.profile__name');
+const profileProfession = profileContainer.querySelector('.profile__about');
+const profileEditButton = profileContainer.querySelector('.profile__edit-btn');
+const profileAddButton = profileContainer.querySelector('.profile__add-btn');
 
-let popupBox = document.querySelector('.popup');
-let closePopupButton = popupBox.querySelector('.popup__close-btn');
-let formElement = popupBox.querySelector('.popup__form');
+const popupEditProfile = document.querySelector('.popup__type_edit-profile');
+const popupAddCard = document.querySelector('.popup__type_add-card');
+const closePopupButton = document.querySelector('.popup__close-btn');
 
-let nameInput = formElement.querySelector('#input-name');
-let professionInput = formElement.querySelector('#input-profession');
+const ProfileForm = document.querySelector('#edit-profile-form');
+const nameInput = ProfileForm.querySelector('#input-name');
+const professionInput = ProfileForm.querySelector('#input-profession');
 
-function openPopup() {
-  nameInput.value = profileName.textContent;
-  professionInput.value = profileProfession.textContent;
+const cardForm = document.querySelector('#add-card-form');
+const cardInputTitle = cardForm.querySelector('#card-title');
+const imageInputLink = cardForm.querySelector('#image-link');
+
+function togglePopup(popupBox) {
+  if (!popupBox.classList.contains('popup_visible')) {
+    nameInput.value = profileName.textContent;
+    professionInput.value = profileProfession.textContent;
+  }
+
   popupBox.classList.toggle('popup_visible');
 }
 
-function closePopup() {
-  popupBox.classList.toggle('popup_visible');
-}
+// function closePopup(popupBox) {
+//   popupBox.classList.remove('popup_visible');
+// }
 
 function formHandler(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileProfession.textContent = professionInput.value;
-  closePopup();
+  // z.textContent = cardInputTitle.value;
+  // x.src = imageInputLink.value;
+
+  const allThePopups = document.querySelectorAll('.popup');
+  allThePopups.forEach(popup => popup.classList.remove('popup_visible'));
 }
 
-profileEditButton.addEventListener('click', openPopup);
-closePopupButton.addEventListener('click', closePopup);
-formElement.addEventListener('submit', formHandler);
+ProfileForm.addEventListener('submit', formHandler);
+
+profileEditButton.addEventListener('click', () => togglePopup(popupEditProfile));
+profileAddButton.addEventListener('click', () => togglePopup(popupAddCard));
+
+const allCloseButtons = document.querySelectorAll('.popup__close-btn');
+allCloseButtons.forEach(btn =>
+  btn.addEventListener('click', () => {
+    const allThePopups = document.querySelectorAll('.popup');
+    allThePopups.forEach(popup => popup.classList.remove('popup_visible'));
+  })
+);
+
+cardForm.addEventListener('submit');
