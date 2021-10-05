@@ -25,50 +25,7 @@
           <button type="button" aria-label="Add Image" class="profile__add-btn"></button>
         </section>
         <section class="cards">
-          <ul class="cards__list">
-            <li class="card">
-              <img src="./images/card-img1.jpg" alt="Card image" class="card__img" />
-              <div class="card__info">
-                <h2 class="card__title">Yosemite Valley</h2>
-                <button type="button" aria-label="Like" class="card__like-btn card__like-btn_active"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img src="./images/card-img2.png" alt="Card image" class="card__img" />
-              <div class="card__info">
-                <h2 class="card__title">Lake Louise</h2>
-                <button type="button" aria-label="Like" class="card__like-btn"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img src="./images/card-img3.png" alt="Card image" class="card__img" />
-              <div class="card__info">
-                <h2 class="card__title">Bald Mountains</h2>
-                <button type="button" aria-label="Like" class="card__like-btn"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img src="./images/card-img4.png" alt="Card image" class="card__img" />
-              <div class="card__info">
-                <h2 class="card__title">Latemar</h2>
-                <button type="button" aria-label="Like" class="card__like-btn"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img src="./images/card-img5.png" alt="Card image" class="card__img" />
-              <div class="card__info">
-                <h2 class="card__title">Vanoise National Park</h2>
-                <button type="button" aria-label="Like" class="card__like-btn"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img src="./images/card-img6.png" alt="Card image" class="card__img" />
-              <div class="card__info">
-                <h2 class="card__title">Lago di Braies</h2>
-                <button type="button" aria-label="Like" class="card__like-btn"></button>
-              </div>
-            </li>
-          </ul>
+          <ul class="cards__list"></ul>
         </section>
       </main>
       <footer class="footer">
@@ -85,6 +42,15 @@
           </form>
         </div>
       </div>
+      <template id="card-template">
+        <li class="card">
+          <img src="" alt="Card image" class="card__img" />
+          <div class="card__info">
+            <h2 class="card__title"></h2>
+            <button type="button" aria-label="Like" class="card__like-btn"></button>
+          </div>
+        </li>
+      </template>
     </div>
     <script src="./scripts/script.js"></script>
   </body>
