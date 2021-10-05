@@ -70,6 +70,7 @@ const closePopupButton = document.querySelector('.popup__close-btn');
 // Elements
 const editProfilePopup = document.querySelector('.popup__type_edit-profile');
 const addCardPopup = document.querySelector('.popup__type_add-card');
+const allThePopups = document.querySelectorAll('.popup');
 
 // Forms
 const editProfileForm = document.querySelector('#edit-profile-form');
@@ -80,27 +81,47 @@ const cardAddForm = document.querySelector('#add-card-form');
 const cardInputTitle = cardAddForm.querySelector('#card-title');
 const imageInputLink = cardAddForm.querySelector('#image-link');
 
-function togglePopup(popupBox) {
-  if (!popupBox.classList.contains('popup_visible')) {
-    nameInput.value = profileName.textContent;
-    professionInput.value = profileProfession.textContent;
-  }
-
-  popupBox.classList.toggle('popup_visible');
-}
-
-function formHandler(evt) {
+// Add new card
+function submitAddCardForm(evt) {
   evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileProfession.textContent = professionInput.value;
-  const allThePopups = document.querySelectorAll('.popup');
+  const cardElement = createCard({name: cardInputTitle.value, link: imageInputLink.value});
+  cardsContainer.prepend(cardElement);
   allThePopups.forEach(popup => popup.classList.remove('popup_visible'));
 }
 
-profileEditButton.addEventListener('click', () => togglePopup(editProfilePopup));
-profileAddButton.addEventListener('click', () => togglePopup(addCardPopup));
+function openPopup(popupBox) {
+  popupBox.classList.add('popup_visible');
+}
 
-// close all buttons
+function adjustProfileValues() {
+  nameInput.value = profileName.textContent;
+  professionInput.value = profileProfession.textContent;
+}
+
+function resetNewCardForm() {
+  cardInputTitle.value = '';
+  imageInputLink.value = '';
+}
+
+function submitEditProfileForm(evt) {
+  evt.preventDefault();
+  profileName.textContent = nameInput.value;
+  profileProfession.textContent = professionInput.value;
+
+  allThePopups.forEach(popup => popup.classList.remove('popup_visible'));
+}
+
+profileEditButton.addEventListener('click', () => {
+  adjustProfileValues();
+  openPopup(editProfilePopup);
+});
+
+profileAddButton.addEventListener('click', () => {
+  resetNewCardForm();
+  openPopup(addCardPopup);
+});
+
+// event handler for all popup close buttons
 const allCloseButtons = document.querySelectorAll('.popup__close-btn');
 allCloseButtons.forEach(btn =>
   btn.addEventListener('click', () => {
@@ -109,5 +130,6 @@ allCloseButtons.forEach(btn =>
   })
 );
 
-editProfileForm.addEventListener('submit', formHandler);
-cardAddForm.addEventListener('submit', () => createCard());
+// Submit handlers
+editProfileForm.addEventListener('submit', submitEditProfileForm);
+cardAddForm.addEventListener('submit', submitAddCardForm);
