@@ -1,5 +1,3 @@
-// initialize cards on page
-
 const initialCards = [
   {
     name: 'Yosemite Valley',
@@ -28,22 +26,32 @@ const initialCards = [
 ];
 
 function createCard(card) {
+  // { name, link}
   // grabbing template and cloning .card node
   const cardTemplate = document.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   const cardTitleElement = cardElement.querySelector('.card__title');
   const cardLinkElement = cardElement.querySelector('.card__img');
+
   cardTitleElement.textContent = card.name;
   cardLinkElement.src = card.link;
+  cardLinkElement.alt = card.name;
+
   // click like
   const clickLike = cardElement.querySelector('.card__like-btn');
   clickLike.addEventListener('click', function (evt) {
     evt.target.classList.toggle('card__like-btn_active');
   });
 
+  // delete Button
+  const cardDeleteButton = cardElement.querySelector('.card__delete-btn');
+  cardDeleteButton.addEventListener('click', function (evt) {
+    cardDeleteButton.closest('.card').remove();
+  });
+
   return cardElement;
 }
-
+// initial cards on page
 const cardsContainer = document.querySelector('.cards__list');
 
 initialCards.forEach(card => {
@@ -51,24 +59,26 @@ initialCards.forEach(card => {
   cardsContainer.append(cardElement);
 });
 
-// forms
+// Buttons
 const profileContainer = document.querySelector('.profile');
 const profileName = profileContainer.querySelector('.profile__name');
 const profileProfession = profileContainer.querySelector('.profile__about');
 const profileEditButton = profileContainer.querySelector('.profile__edit-btn');
 const profileAddButton = profileContainer.querySelector('.profile__add-btn');
-
-const popupEditProfile = document.querySelector('.popup__type_edit-profile');
-const popupAddCard = document.querySelector('.popup__type_add-card');
 const closePopupButton = document.querySelector('.popup__close-btn');
 
-const ProfileForm = document.querySelector('#edit-profile-form');
-const nameInput = ProfileForm.querySelector('#input-name');
-const professionInput = ProfileForm.querySelector('#input-profession');
+// Elements
+const editProfilePopup = document.querySelector('.popup__type_edit-profile');
+const addCardPopup = document.querySelector('.popup__type_add-card');
 
-const cardForm = document.querySelector('#add-card-form');
-const cardInputTitle = cardForm.querySelector('#card-title');
-const imageInputLink = cardForm.querySelector('#image-link');
+// Forms
+const editProfileForm = document.querySelector('#edit-profile-form');
+const nameInput = editProfileForm.querySelector('#input-name');
+const professionInput = editProfileForm.querySelector('#input-profession');
+
+const cardAddForm = document.querySelector('#add-card-form');
+const cardInputTitle = cardAddForm.querySelector('#card-title');
+const imageInputLink = cardAddForm.querySelector('#image-link');
 
 function togglePopup(popupBox) {
   if (!popupBox.classList.contains('popup_visible')) {
@@ -79,26 +89,18 @@ function togglePopup(popupBox) {
   popupBox.classList.toggle('popup_visible');
 }
 
-// function closePopup(popupBox) {
-//   popupBox.classList.remove('popup_visible');
-// }
-
 function formHandler(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileProfession.textContent = professionInput.value;
-  // z.textContent = cardInputTitle.value;
-  // x.src = imageInputLink.value;
-
   const allThePopups = document.querySelectorAll('.popup');
   allThePopups.forEach(popup => popup.classList.remove('popup_visible'));
 }
 
-ProfileForm.addEventListener('submit', formHandler);
+profileEditButton.addEventListener('click', () => togglePopup(editProfilePopup));
+profileAddButton.addEventListener('click', () => togglePopup(addCardPopup));
 
-profileEditButton.addEventListener('click', () => togglePopup(popupEditProfile));
-profileAddButton.addEventListener('click', () => togglePopup(popupAddCard));
-
+// close all buttons
 const allCloseButtons = document.querySelectorAll('.popup__close-btn');
 allCloseButtons.forEach(btn =>
   btn.addEventListener('click', () => {
@@ -107,4 +109,5 @@ allCloseButtons.forEach(btn =>
   })
 );
 
-cardForm.addEventListener('submit');
+editProfileForm.addEventListener('submit', formHandler);
+cardAddForm.addEventListener('submit', () => createCard());
