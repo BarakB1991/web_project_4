@@ -31,7 +31,7 @@
       <footer class="footer">
         <p class="footer__heading">© 2021 Around The U.S.</p>
       </footer>
-      <div class="popup popup__type_edit-profile">
+      <div class="popup popup_type_edit-profile">
         <div class="popup__box">
           <button type="button" aria-label="Close" class="popup__close-btn"></button>
           <h3 class="popup__title">Edit Profile</h3>
@@ -42,21 +42,42 @@
           </form>
         </div>
       </div>
-      <div class="popup popup__type_add-card">
-        <div class="popup__box popup__theme_add-card">
-          <button type="button" aria-label="Close" class="popup__close-btn"></button>
-          <h3 class="popup__title">New place</h3>
+      <div class="popup popup_type_add-card">
+        <div class="popup__box popup__box_type_add-card">
+          <button type="button" aria-label="Close" class="popup__close-btn popup__close-btn_type_add-card"></button>
+          <h3 class="popup__title popup__title_type_add-card">New place</h3>
           <form class="popup__form" id="add-card-form" name="register">
-            <input type="text" id="card-title" name="card-title" placeholder="Title" class="popup__input" required />
-            <input type="text" id="image-link" name="Image link" placeholder="Image link" class="popup__input" required />
-            <button type="submit" aria-label="Submit" class="popup__submit-btn">Create</button>
+            <input
+              type="text"
+              id="card-title"
+              name="card-title"
+              placeholder="Title"
+              class="popup__input popup__input_type_add-card"
+              required
+            />
+            <input
+              type="url"
+              id="image-link"
+              name="Image link"
+              placeholder="Image link"
+              class="popup__input popup__input_type_add-card"
+              required
+            />
+            <button type="submit" aria-label="Submit" class="popup__submit-btn popup__submit-btn_type_add-card">Create</button>
           </form>
+        </div>
+      </div>
+      <div class="popup popup_type_image">
+        <div class="popup__content">
+          <button type="button" aria-label="Close" class="popup__close-btn popup__close-btn_type_image"></button>
+          <img src="" class="popup__image" />
+          <h4 class="popup__title popup__title_type_image"></h4>
         </div>
       </div>
       <template id="card-template">
         <li class="card">
           <button alt="Delete button" class="card__delete-btn"></button>
-          <img src="" alt="Card image" class="card__img" />
+          <img type="image" src="" alt="Card image" class="card__img" />
           <div class="card__info">
             <h2 class="card__title"></h2>
             <button type="button" aria-label="Like" class="card__like-btn"></button>

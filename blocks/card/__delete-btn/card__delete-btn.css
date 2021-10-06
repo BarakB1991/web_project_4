@@ -10,3 +10,7 @@
   border-style: none;
   cursor: pointer;
 }
+
+.card__delete-btn:hover {
+  opacity: 0.5;
+}
