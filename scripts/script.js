@@ -60,6 +60,7 @@ function createCard(card) {
     imagePopup.classList.add('popup_visible');
     imagePopupTitleElement.textContent = card.name;
     imagePopupImageElement.src = card.link;
+    imagePopupImageElement.alt = card.name;
   });
   return cardElement;
 }

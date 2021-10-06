@@ -21,7 +21,12 @@ The like button, and image button, will become available for interactiveness, an
 
 ### Technologies and techniques used
 
-Used BEM methodology for organizing, so to keep the code tidy and readable. This is a responsive site for every display
-HTML, CSS and Vanilla JS was used for this project.
+- BEM methodology for organizing, so to keep the code tidy and readable.
+- This is a responsive site for every display.
+- HTML.
+- CSS.
+- Vanilla JS: used function and forEach method to initialize 6 cards via JS. also made the site functional with popup
+  forms that change profile details, and add new cards, which can also be deleted.
+  refactored code so it will be most minimal and readable.
 
-### [Link to the project hosted on Github Pages](https://barakb1991.github.io/web_project_4/)
+### [Link to the project hosted on "Github Pages"](https://barakb1991.github.io/web_project_4/)
