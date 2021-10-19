@@ -35,9 +35,29 @@
         <div class="popup__box">
           <button type="button" aria-label="Close" class="popup__close-btn"></button>
           <h3 class="popup__title">Edit Profile</h3>
-          <form class="popup__form" id="edit-profile-form" name="register">
-            <input type="text" id="input-name" name="name" placeholder="Full Name" class="popup__input" required />
-            <input type="text" id="input-profession" name="profession" placeholder="Profession" class="popup__input" required />
+          <form class="popup__form" id="edit-profile-form" name="register" novalidate>
+            <input
+              type="text"
+              id="input-name"
+              name="name"
+              placeholder="Full Name"
+              class="popup__input"
+              minlength="2"
+              maxlength="40"
+              required
+            />
+            <span id="input-name-error" class="popup__error"></span>
+            <input
+              type="text"
+              id="input-profession"
+              name="profession"
+              placeholder="Profession"
+              class="popup__input"
+              minlength="2"
+              maxlength="200"
+              required
+            />
+            <span id="input-profession-error" class="popup__error"></span>
             <button type="submit" aria-label="Submit" class="popup__submit-btn">Save</button>
           </form>
         </div>
@@ -46,26 +66,29 @@
         <div class="popup__box popup__box_type_add-card">
           <button type="button" aria-label="Close" class="popup__close-btn popup__close-btn_type_add-card"></button>
           <h3 class="popup__title popup__title_type_add-card">New place</h3>
-          <form class="popup__form" id="add-card-form" name="register">
+          <form class="popup__form" id="add-card-form" name="add-card" novalidate>
             <input
               type="text"
-              id="card-title"
+              id="input-card-title"
               name="card-title"
               placeholder="Title"
               class="popup__input popup__input_type_add-card"
+              minlength="1"
+              maxlength="30"
               required
             />
+            <span id="input-card-title-error" class="popup__error"></span>
             <input
               type="url"
-              id="image-link"
+              id="input-image-link"
               name="Image link"
               placeholder="Image link"
               class="popup__input popup__input_type_add-card"
               required
             />
-            <button type="submit" aria-label="Submit" class="popup__submit-btn popup__submit-btn_type_add-card">Create</button>
+            <span id="input-image-link-error" class="popup__error"></span>
+            <button type="submit" aria-label="Submit" class="popup__submit-btn popup__submit-btn_type_add-card">Save</button>
           </form>
-        </div>
       </div>
       <div class="popup popup_type_image">
         <div class="popup__content">
@@ -85,6 +108,7 @@
         </li>
       </template>
     </div>
-    <script src="./scripts/script.js"></script>
+    <script src="./scripts/validate.js" defer></script>
+    <script src="./scripts/script.js" defer></script>
   </body>
 </html>

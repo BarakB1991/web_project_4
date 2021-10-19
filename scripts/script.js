@@ -82,7 +82,7 @@ const imagePopupImageElement = imagePopup.querySelector('.popup__image');
 
 // Buttons
 const profileEditButton = profileContainer.querySelector('.profile__edit-btn');
-const profileAddButton = profileContainer.querySelector('.profile__add-btn');
+const profileAddCardFormButton = profileContainer.querySelector('.profile__add-btn');
 
 // Forms
 const editProfileForm = document.querySelector('#edit-profile-form');
@@ -90,8 +90,8 @@ const nameInput = editProfileForm.querySelector('#input-name');
 const professionInput = editProfileForm.querySelector('#input-profession');
 
 const cardAddForm = document.querySelector('#add-card-form');
-const cardInputTitle = cardAddForm.querySelector('#card-title');
-const imageInputLink = cardAddForm.querySelector('#image-link');
+const cardInputTitle = cardAddForm.querySelector('#input-card-title');
+const imageInputLink = cardAddForm.querySelector('#input-image-link');
 
 // Submit "add new card" form
 function submitAddCardForm(evt) {
@@ -122,12 +122,12 @@ function matchProfileValues() {
   professionInput.value = profileProfession.textContent;
 }
 
-function resetNewCardForm() {
-  cardInputTitle.value = '';
-  imageInputLink.value = '';
+function resetNewCardForm(formElement) {
+  cardAddForm.reset(); // refactored Reset values, with quick reset() method on form
 }
 
 const allCloseButtons = document.querySelectorAll('.popup__close-btn');
+
 allCloseButtons.forEach(btn =>
   btn.addEventListener('click', evt => {
     const openedPopup = evt.target.closest('.popup_visible');
@@ -135,14 +135,26 @@ allCloseButtons.forEach(btn =>
   })
 );
 
+function newFunction() {
+  document.querySelectorAll('.popup').forEach(btn =>
+    btn.addEventListener('click', evt => {
+      const openedPopup = evt.target.closest('.popup');
+      closePopup(openedPopup);
+    })
+  );
+}
+
 profileEditButton.addEventListener('click', () => {
   matchProfileValues();
+  checkInitialFormValidity(editProfileForm, pageSettings);
   openPopup(editProfilePopup);
 });
 
-profileAddButton.addEventListener('click', () => {
-  resetNewCardForm();
+profileAddCardFormButton.addEventListener('click', () => {
   openPopup(addCardPopup);
+  resetNewCardForm();
+  checkInitialFormValidity(cardAddForm, pageSettings);
+  newFunction();
 });
 
 // Submit handlers

@@ -211,5 +211,8 @@
   "liveServer.settings.host": "localhost",
   "liveServer.settings.useLocalIp": true,
   "fiveServer.browser": ["chrome"],
-  "fiveServer.openTerminal": false
+  "fiveServer.openTerminal": false,
+  "gitlens.currentLine.enabled": true,
+  "gitlens.hovers.currentLine.over": "line",
+  "gitlens.codeLens.enabled": true
 }
