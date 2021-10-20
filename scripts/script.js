@@ -29,7 +29,6 @@ const initialCards = [
 const cardTemplate = document.querySelector('#card-template').content;
 
 function createCard(card) {
-  // { name, link}
   //  Cloning .card node
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   const cardTitleElement = cardElement.querySelector('.card__title');
@@ -131,7 +130,6 @@ function removeClosePopupEventListeners() {
 }
 
 function closePopupViaOutsideClick(evt) {
-  console.log(evt.target);
   if (evt.target.classList.contains(`popup`)) {
     closePopup(evt.target);
   }
@@ -148,7 +146,7 @@ function matchProfileValues() {
   professionInput.value = profileProfession.textContent;
 }
 
-function resetNewCardForm(formElement) {
+function resetNewCardForm(formElement, inputElement, settings) {
   cardAddForm.reset(); // refactored Reset values, with quick reset() method on form
 }
 
@@ -168,9 +166,9 @@ profileEditButton.addEventListener('click', () => {
 });
 
 profileAddCardFormButton.addEventListener('click', () => {
-  resetNewCardForm();
   checkInitialFormValidity(cardAddForm, pageSettings);
   openPopup(addCardPopup);
+  resetNewCardForm();
 });
 
 // Submit handlers

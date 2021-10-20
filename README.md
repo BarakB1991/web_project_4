@@ -1,4 +1,4 @@
-# Project 4: Around The U.S.
+# Project 6: Around The U.S.
 
 A project made during the Practicum100 Web Dev course.
 
