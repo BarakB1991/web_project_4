@@ -135,15 +135,6 @@ allCloseButtons.forEach(btn =>
   })
 );
 
-function newFunction() {
-  document.querySelectorAll('.popup').forEach(btn =>
-    btn.addEventListener('click', evt => {
-      const openedPopup = evt.target.closest('.popup');
-      closePopup(openedPopup);
-    })
-  );
-}
-
 profileEditButton.addEventListener('click', () => {
   matchProfileValues();
   checkInitialFormValidity(editProfileForm, pageSettings);
@@ -154,7 +145,6 @@ profileAddCardFormButton.addEventListener('click', () => {
   openPopup(addCardPopup);
   resetNewCardForm();
   checkInitialFormValidity(cardAddForm, pageSettings);
-  newFunction();
 });
 
 // Submit handlers
