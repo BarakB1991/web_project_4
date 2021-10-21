@@ -115,6 +115,7 @@ function openPopup(popupBox) {
 
 function closePopup(popupBox) {
   popupBox.classList.remove('popup_visible');
+
   removeClosePopupEventListeners();
 }
 
@@ -161,14 +162,14 @@ allCloseButtons.forEach(btn =>
 
 profileEditButton.addEventListener('click', () => {
   matchProfileValues();
-  checkInitialFormValidity(editProfileForm, pageSettings);
+  resetValidityWhenPopupOpen(editProfileForm, pageSettings);
   openPopup(editProfilePopup);
 });
 
 profileAddCardFormButton.addEventListener('click', () => {
-  checkInitialFormValidity(cardAddForm, pageSettings);
-  openPopup(addCardPopup);
   resetNewCardForm();
+  resetValidityWhenPopupOpen(cardAddForm, pageSettings);
+  openPopup(addCardPopup);
 });
 
 // Submit handlers

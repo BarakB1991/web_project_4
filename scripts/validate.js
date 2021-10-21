@@ -66,10 +66,12 @@ function enableValidation(settings) {
   });
 }
 
-function checkInitialFormValidity(formElement, settings) {
-  const inputElements = [...formElement.querySelectorAll(settings.inputSelector)]; // made array of nodeList
+function resetValidityWhenPopupOpen(formElement, settings) {
+  const inputElements = [...formElement.querySelectorAll(settings.inputSelector)];
   const buttonElement = formElement.querySelector(settings.submitButtonSelector);
-
+  inputElements.forEach(inputElement => {
+    hideInputError(formElement, inputElement, settings);
+  });
   toggleButtonState(inputElements, buttonElement, settings);
 }
 
