@@ -39,27 +39,39 @@ function createCard(card) {
   cardImage.alt = card.name;
 
   // Click like
+  setLikeBtnEvtLstnr(cardElement);
+
+  // Delete Button
+  setCardDeleteButton(cardElement);
+
+  // Card image popup
+  setCardImagePopup(cardImage);
+
+  return cardElement;
+}
+
+function setLikeBtnEvtLstnr(cardElement) {
   const likeButton = cardElement.querySelector('.card__like-btn');
   likeButton.addEventListener('click', function (evt) {
     evt.target.classList.toggle('card__like-btn_active');
   });
+}
 
-  // Delete Button
+function setCardDeleteButton(cardElement) {
   const deleteCardButton = cardElement.querySelector('.card__delete-btn');
-  deleteCardButton.addEventListener('click', function (evt) {
+  deleteCardButton.addEventListener('click', function () {
     deleteCardButton.closest('.card').remove();
   });
+}
 
-  // Card image popup
+function setCardImagePopup(cardImage) {
   cardImage.addEventListener('click', function (evt) {
     imagePopupTitleElement.textContent = card.name;
     imagePopupImageElement.src = card.link;
     imagePopupImageElement.alt = card.name;
     openPopup(imagePopup);
   });
-  return cardElement;
 }
-
 // Initialize 6 cards in cards container on page
 const cardsContainer = document.querySelector('.cards__list');
 
