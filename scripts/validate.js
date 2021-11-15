@@ -14,6 +14,7 @@ function showInputError(formElement, inputElement, settings) {
   errorElement.textContent = inputElement.validationMessage;
   errorElement.classList.add(settings.errorClass);
 }
+
 function hideInputError(formElement, inputElement, settings) {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
 
@@ -76,3 +77,5 @@ function resetValidityWhenPopupOpen(formElement, settings) {
 }
 
 enableValidation(pageSettings);
+
+let check = 'checking';

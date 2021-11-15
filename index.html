@@ -35,7 +35,7 @@
         <div class="popup__box">
           <button type="button" aria-label="Close" class="popup__close-btn"></button>
           <h3 class="popup__title">Edit Profile</h3>
-          <form class="popup__form" id="edit-profile-form" name="register" novalidate>
+          <form class="popup__form" id="edit-profile-form" name="register" novalidate autocomplete="off">
             <input
               type="text"
               id="input-name"
@@ -66,7 +66,7 @@
         <div class="popup__box popup__box_type_add-card">
           <button type="button" aria-label="Close" class="popup__close-btn popup__close-btn_type_add-card"></button>
           <h3 class="popup__title popup__title_type_add-card">New place</h3>
-          <form class="popup__form" id="add-card-form" name="add-card" novalidate>
+          <form class="popup__form" id="add-card-form" name="add-card" novalidate autocomplete="off">
             <input
               type="text"
               id="input-card-title"
@@ -109,7 +109,9 @@
         </li>
       </template>
     </div>
-    <script src="./scripts/validate.js" defer></script>
-    <script src="./scripts/script.js" defer></script>
+    <script type="module" src="./scripts/script.js"></script>
+    <!-- <script type="module" src="./scripts/utils.js"></script> -->
+    <!-- <script type="module" src="./scripts/Card.js"></script> -->
+    <script type="module" src="./scripts/FormValidator.js"></script>
   </body>
 </html>

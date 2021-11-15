@@ -1,3 +1,5 @@
+import FormValidator from './FormValidator.js';
+
 const initialCards = [
   {
     name: 'Yosemite Valley',
@@ -174,16 +176,32 @@ allCloseButtons.forEach(btn =>
 
 profileEditButton.addEventListener('click', () => {
   matchProfileValues();
-  resetValidityWhenPopupOpen(editProfileForm, pageSettings);
+  // FormValidator._resetValidityWhenPopupOpen(editProfileForm);
   openPopup(editProfilePopup);
 });
 
 profileAddCardFormButton.addEventListener('click', () => {
   resetNewCardForm();
-  resetValidityWhenPopupOpen(cardAddForm, pageSettings);
+  // FormValidator._resetValidityWhenPopupOpen(cardAddForm);
   openPopup(addCardPopup);
 });
 
 // Submit handlers
 editProfileForm.addEventListener('submit', submitEditProfileForm);
 cardAddForm.addEventListener('submit', submitAddCardForm);
+
+const formSelector = '.popup__form';
+const formSettings = {
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-btn',
+  inactiveButtonClass: 'popup__submit-btn_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
+
+const getFormsList = Array.from(document.querySelectorAll(formSelector)); // find form and iterate over them
+getFormsList.forEach(formElement => {
+  const formValidator = new FormValidator(formSettings, formElement);
+
+  formValidator.enableValidation();
+});
