@@ -4,19 +4,19 @@ class FormValidator {
     this._submitButtonSelector = settings.submitButtonSelector;
     this._inactiveButtonClass = settings.inactiveButtonClass;
     this._inputErrorClass = settings.inputErrorClass;
-    this._errorClass = settings.pageSettingserrorClass;
+    this._errorClass = settings.errorClass;
 
     this._formElement = formElement;
   }
 
-  // _resetValidityWhenPopupOpen() {
-  //   const inputElements = [...formElement.querySelectorAll(this._inputSelector)];
-  //   const buttonElement = formElement.querySelector(this._submitButtonSelector);
-  //   inputElements.forEach(inputElement => {
-  //     hideInputError(inputElement);
-  //   });
-  //   toggleButtonState(inputElements, buttonElement, settings);
-  // }
+  resetValidityWhenPopupOpen() {
+    const inputElements = [...this._formElement.querySelectorAll(this._inputSelector)];
+    const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
+    inputElements.forEach(inputElement => {
+      this._hideInputError(inputElement);
+    });
+    this._toggleButtonState(inputElements, buttonElement);
+  }
 
   _hideInputError(inputElement) {
     const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
