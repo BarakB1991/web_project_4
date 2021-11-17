@@ -1,4 +1,4 @@
-import {openPopup, closePopup} from 'utils.js';
+import {openPopup, imagePopup, imagePopupTitleElement, imagePopupImageElement} from './utils.js';
 
 export default class Card {
   constructor(cardData, cardTemplateSelector) {
@@ -49,11 +49,5 @@ export default class Card {
     this._addEventListeners();
 
     return this._element;
-
-    _setLikeBtnEvtLstnr(cardElement);
-
-    _setCardDeleteButton(cardElement);
-
-    _setCardImagePopup(cardImage);
   }
 }
