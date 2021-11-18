@@ -1,4 +1,4 @@
-# Project 6: Around The U.S.
+# Project 7: Around The U.S.
 
 A project made during the Practicum100 Web Dev course.
 
@@ -7,17 +7,18 @@ This project shows images uploaded to server by the user.
 ## Table of content
 
 - Description and functions
-- Later additions
+- Modular JS
 - Technologies and techniques used
+- Later additions
 - Link to project
 
 ### Description and functions
 
 The webpage contains a profile, which it's name and profession can be changed via a popup form, by a click of a button.
 
-### Later additions
+### Modular JS and OOP
 
-The like button, and image button, will become available for interactiveness, and editing via site.
+Code has been organized based on Modular JS and Object Oriented Programming.
 
 ### Technologies and techniques used
 
@@ -28,5 +29,10 @@ The like button, and image button, will become available for interactiveness, an
 - Vanilla JS: used function and forEach method to initialize 6 cards via JS. also made the site functional with popup
   forms that change profile details, and add new cards, which can also be deleted.
   refactored code so it will be most minimal and readable.
+
+### Later additions
+
+Will bundle it with Parcel or Webpack
+Site will recieve forms data and save it to server.
 
 ### [Link to the project hosted on "Github Pages"](https://barakb1991.github.io/web_project_4/)
