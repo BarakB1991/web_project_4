@@ -8,16 +8,9 @@ export default class Card {
   }
 
   _addEventListeners() {
-    const cardImage = this._element.querySelector('.card__img');
-    const cardTitleElement = this._element.querySelector('.card__title');
-
-    cardImage.src = this._link;
-    cardImage.alt = this._name;
-    cardTitleElement.textContent = this._name;
-
     this._setLikeBtnEvtLstnr();
     this._setCardDeleteButton();
-    this._setCardImagePopup(cardImage);
+    this._setCardImagePopup();
   }
 
   _setLikeBtnEvtLstnr() {
@@ -29,13 +22,15 @@ export default class Card {
 
   _setCardDeleteButton() {
     const deleteCardButton = this._element.querySelector('.card__delete-btn');
-    deleteCardButton.addEventListener('click', function () {
+    deleteCardButton.addEventListener('click', function (evt) {
+      console.log(evt);
+      evt.stopPropagation();
       deleteCardButton.closest('.card').remove();
     });
   }
 
-  _setCardImagePopup(cardImage) {
-    cardImage.addEventListener('click', function (evt) {
+  _setCardImagePopup() {
+    this._element.addEventListener('click', () => {
       imagePopupTitleElement.textContent = this._name;
       imagePopupImageElement.src = this._link;
       imagePopupImageElement.alt = this._name;
@@ -45,7 +40,9 @@ export default class Card {
 
   renderCard() {
     this._element = this._template.cloneNode(true);
-
+    this._element.querySelector('.card__img').src = this._link;
+    this._element.querySelector('.card__title').alt = this._name;
+    this._element.querySelector('.card__title').textContent = this._name;
     this._addEventListeners();
 
     return this._element;
