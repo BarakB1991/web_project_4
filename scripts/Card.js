@@ -17,24 +17,26 @@ export default class Card {
     const likeButton = this._element.querySelector('.card__like-btn');
     likeButton.addEventListener('click', function (evt) {
       evt.target.classList.toggle('card__like-btn_active');
+      evt.stopPropagation();
     });
   }
 
   _setCardDeleteButton() {
     const deleteCardButton = this._element.querySelector('.card__delete-btn');
     deleteCardButton.addEventListener('click', function (evt) {
-      console.log(evt);
       evt.stopPropagation();
       deleteCardButton.closest('.card').remove();
     });
   }
 
   _setCardImagePopup() {
-    this._element.addEventListener('click', () => {
-      imagePopupTitleElement.textContent = this._name;
-      imagePopupImageElement.src = this._link;
-      imagePopupImageElement.alt = this._name;
-      openPopup(imagePopup);
+    this._element.addEventListener('click', evt => {
+      if (evt.target.classList.contains(`card__img`)) {
+        imagePopupTitleElement.textContent = this._name;
+        imagePopupImageElement.src = this._link;
+        imagePopupImageElement.alt = this._name;
+        openPopup(imagePopup);
+      }
     });
   }
 
