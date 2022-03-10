@@ -64,7 +64,7 @@
     ".idea": true,
     "/pycache": true
   },
-  "editor.fontSize": 13,
+  "editor.fontSize": 16,
   "git.enableSmartCommit": true,
   "workbench.statusBar.visible": true,
   "breadcrumbs.enabled": false,

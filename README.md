@@ -1,4 +1,4 @@
-# Project 7: Around The U.S.
+# Project 8: Around The U.S.
 
 A project made during the Practicum100 Web Dev course.
 
@@ -22,17 +22,16 @@ Code has been organized based on Modular JS and Object Oriented Programming.
 
 ### Technologies and techniques used
 
+- Built with Webpack and JS transpiler: Babel
 - BEM methodology for organizing, so to keep the code tidy and readable.
 - This is a responsive site for every display.
+- Methodology: OOP
 - HTML.
 - CSS.
-- Vanilla JS: used function and forEach method to initialize 6 cards via JS. also made the site functional with popup
-  forms that change profile details, and add new cards, which can also be deleted.
-  refactored code so it will be most minimal and readable.
 
 ### Later additions
 
-Will bundle it with Parcel or Webpack
+DONE: ~~Will bundle it with Parcel or Webpack~~
 Site will recieve forms data and save it to server.
 
 ### [Link to the project hosted on "Github Pages"](https://barakb1991.github.io/web_project_4/)

@@ -1,16 +1,16 @@
-import {openPopup, imagePopup, imagePopupTitleElement, imagePopupImageElement} from './utils.js';
-
 export default class Card {
-  constructor(cardData, cardTemplateSelector) {
+  constructor(cardData, cardTemplateSelector, onImageClick) {
     this._name = cardData.name;
     this._link = cardData.link;
     this._template = document.querySelector(cardTemplateSelector).content.querySelector('.card');
+
+    this._onImageClick = onImageClick;
   }
 
   _addEventListeners() {
     this._setLikeBtnEvtLstnr();
     this._setCardDeleteButton();
-    this._setCardImagePopup();
+    this._element.querySelector('.card__img').addEventListener('click', () => this._handlePreviewPicture());
   }
 
   _setLikeBtnEvtLstnr() {
@@ -29,15 +29,8 @@ export default class Card {
     });
   }
 
-  _setCardImagePopup() {
-    this._element.addEventListener('click', evt => {
-      if (evt.target.classList.contains(`card__img`)) {
-        imagePopupTitleElement.textContent = this._name;
-        imagePopupImageElement.src = this._link;
-        imagePopupImageElement.alt = this._name;
-        openPopup(imagePopup);
-      }
-    });
+  _handlePreviewPicture() {
+    this._onImageClick({link: this._link, name: this._name});
   }
 
   renderCard() {
