@@ -25,13 +25,16 @@ userInfo.setUserInfo({name: 'Abraham Lincoln', profession: 'A founding Father'})
 
 const imagePopupWindow = new PopupWithImage('.popup_type_image');
 // Initialize 6 cards
+
+function renderCard(item) {
+  const card = new Card(item, cardTemplateSelector, imagePopupWindow.open);
+  const cardElement = card.renderCard();
+  cardSection.addItem(cardElement);
+}
+
 const cardSection = new Section('.cards__list', {
   items: initialCards,
-  renderer: item => {
-    const card = new Card(item, cardTemplateSelector, imagePopupWindow.open);
-    const cardElement = card.renderCard();
-    cardSection.addItem(cardElement);
-  }
+  renderer: renderCard
 });
 cardSection.renderer();
 
@@ -41,9 +44,7 @@ const profilePopupWindow = new PopupWithForm('.popup_type_edit-profile', data =>
 
 const addCardPopupWindow = new PopupWithForm('.popup_type_add-card', data => {
   const {cardtitle: name, imagelink: link} = data;
-  const card = new Card({name, link}, cardTemplateSelector, imagePopupWindow.open);
-  const cardElement = card.renderCard();
-  cardSection.addItem(cardElement);
+  renderCard({name, link});
 });
 
 imagePopupWindow.setEventListeners();
@@ -70,7 +71,7 @@ profileEditButton.addEventListener('click', () => {
 
 profileAddCardFormButton.addEventListener('click', () => {
   addCardPopupWindow.open();
-  cardFormValidator.resetValidityWhenPopupOpen();
+  cardFormValidator.resetValidation();
 });
 
 cardFormValidator.enableValidation();

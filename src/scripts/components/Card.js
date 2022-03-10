@@ -7,39 +7,40 @@ export default class Card {
     this._onImageClick = onImageClick;
   }
 
-  _addEventListeners() {
-    this._setLikeBtnEvtLstnr();
-    this._setCardDeleteButton();
-    this._element.querySelector('.card__img').addEventListener('click', () => this._handlePreviewPicture());
-  }
-
-  _setLikeBtnEvtLstnr() {
+  _addEventListeners = () => {
     const likeButton = this._element.querySelector('.card__like-btn');
-    likeButton.addEventListener('click', function (evt) {
-      evt.target.classList.toggle('card__like-btn_active');
-      evt.stopPropagation();
-    });
-  }
+    likeButton.addEventListener('click', this._handleLikeButton);
 
-  _setCardDeleteButton() {
     const deleteCardButton = this._element.querySelector('.card__delete-btn');
-    deleteCardButton.addEventListener('click', function (evt) {
-      evt.stopPropagation();
-      deleteCardButton.closest('.card').remove();
-    });
-  }
+    deleteCardButton.addEventListener('click', this._handleDeleteButton);
 
-  _handlePreviewPicture() {
+    const previewPicture = this._element.querySelector('.card__img');
+    previewPicture.addEventListener('click', () => this._handlePreviewPicture());
+  };
+
+  _handleDeleteButton = evt => {
+    evt.stopPropagation();
+    this._element.remove();
+    this._element = null;
+  };
+
+  _handleLikeButton = evt => {
+    evt.stopPropagation();
+    evt.target.classList.toggle('card__like-btn_active');
+  };
+
+  _handlePreviewPicture = () => {
     this._onImageClick({link: this._link, name: this._name});
-  }
+  };
 
-  renderCard() {
+  renderCard = () => {
     this._element = this._template.cloneNode(true);
-    this._element.querySelector('.card__img').src = this._link;
-    this._element.querySelector('.card__title').alt = this._name;
+    const cardImage = this._element.querySelector('.card__img');
+    cardImage.src = this._link;
+    cardImage.alt = this._name;
     this._element.querySelector('.card__title').textContent = this._name;
     this._addEventListeners();
 
     return this._element;
-  }
+  };
 }

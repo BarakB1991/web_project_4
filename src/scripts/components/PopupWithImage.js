@@ -13,7 +13,6 @@ export default class PopupWithImage extends Popup {
     imagePopupImageElement.src = link;
     imagePopupImageElement.alt = name;
 
-    this._popup.classList.add('popup_visible');
-    document.addEventListener('keyup', this._handleEscClose);
+    super.open();
   };
 }

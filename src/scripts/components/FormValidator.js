@@ -9,7 +9,7 @@ class FormValidator {
     this._formElement = formElement;
   }
 
-  resetValidityWhenPopupOpen() {
+  resetValidation() {
     const inputElements = [...this._formElement.querySelectorAll(this._inputSelector)];
     const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
     inputElements.forEach(inputElement => {
