@@ -47,7 +47,7 @@ const addCardPopupWindow = new PopupWithForm('.popup_type_add-card', data => {
   renderCard({name, link});
 });
 
-imagePopupWindow.setEventListeners();
+// imagePopupWindow.setEventListeners();
 profilePopupWindow.setEventListeners();
 addCardPopupWindow.setEventListeners();
 
