@@ -19,12 +19,21 @@ import {
   cardTemplateSelector
 } from '../utils/constants.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
+
+const api = new Api({
+  baseUrl: 'https://around.nomoreparties.co/v1/group-12',
+  headers: {
+    authorization: 'c785e696-84a9-4aca-b3d2-750b2694b444',
+    'Content-Type': 'application/json'
+  }
+});
 
 const userInfo = new UserInfo({name: profileName, profession: profileProfession});
 userInfo.setUserInfo({name: 'Abraham Lincoln', profession: 'A founding Father'});
 
 const imagePopupWindow = new PopupWithImage('.popup_type_image');
-// Initialize 6 cards
+// Initialize  cards
 
 function renderCard(item) {
   const card = new Card(item, cardTemplateSelector, imagePopupWindow.open);
@@ -33,7 +42,7 @@ function renderCard(item) {
 }
 
 const cardSection = new Section('.cards__list', {
-  items: initialCards,
+  items: api.getInitialCards(),
   renderer: renderCard
 });
 cardSection.renderer();
