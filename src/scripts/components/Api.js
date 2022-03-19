@@ -34,7 +34,22 @@ export default class Api {
 
   editProfile = () => {};
 
-  addNewCard = () => {};
+  addNewCard(name, link) {
+    return fetch(`${this._url}/cards`, {
+      method: 'POST',
+      headers: {
+        authorization: this._token,
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({name: name, link: link})
+    }).then(response => {
+      if (response.ok) {
+        return {name, link};
+      } else {
+        return Promise.reject(`Error: ${res.status}`);
+      }
+    });
+  }
 
   removeUserCard = () => {};
 

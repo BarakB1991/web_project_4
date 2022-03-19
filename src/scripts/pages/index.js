@@ -26,8 +26,8 @@ const api = new Api({
 });
 
 const userInfo = new UserInfo({
-  name: profileName,
-  profession: profileProfession,
+  userName: profileName,
+  userAbout: profileProfession,
   avatar: profileAvatar
 });
 
@@ -83,19 +83,20 @@ profileAddCardFormButton.addEventListener('click', () => {
 cardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
 
-api.getInitialCards().then(cards => {
-  cardSection.renderer(cards);
-});
+api
+  .getInitialCards()
+  .then(cards => {
+    cardSection.renderer(cards);
+  })
+  .catch(err => console.log(err.status, err.statusText));
 
-api.getUserData().then(
-  me => {
+api
+  .getUserData()
+  .then(userData => {
     userInfo.setUserInfo({
-      name: me.name,
-      profession: me.about
+      userName: userData.name,
+      userAbout: userData.about
     });
-    userInfo.setUserAvatar(me.avatar);
-  }
-
-  // _id: 'e20537ed11237f86bbb20ccb',
-  // cohort: 'group-42'
-);
+    userInfo.setUserAvatar(userData.avatar);
+  })
+  .catch(err => console.log(err.status, err.statusText));
