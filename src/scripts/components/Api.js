@@ -4,6 +4,10 @@ export default class Api {
     this._token = options.token;
   }
 
+  promiseCardsAndUserData() {
+    return Promise.all([this.getUserData(), this.getInitialCards()]);
+  }
+
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
       headers: {authorization: this._token}
@@ -16,7 +20,17 @@ export default class Api {
     });
   }
 
-  getUserData = () => {};
+  getUserData() {
+    return fetch(`${this._url}/users/me`, {
+      headers: {authorization: this._token}
+    }).then(res => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return Promise.reject(`Error: ${res.status}`);
+      }
+    });
+  }
 
   editProfile = () => {};
 

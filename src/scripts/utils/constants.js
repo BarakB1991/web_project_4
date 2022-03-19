@@ -4,6 +4,7 @@ export const addCardPopup = document.querySelector('.popup_type_add-card');
 export const profileContainer = document.querySelector('.profile');
 export const profileName = profileContainer.querySelector('.profile__name');
 export const profileProfession = profileContainer.querySelector('.profile__about');
+export const profileAvatar = profileContainer.querySelector('.profile__img');
 
 // Forms elements
 export const cardAddForm = document.querySelector('#add-card-form');
