@@ -32,7 +32,19 @@ export default class Api {
     });
   }
 
-  editProfile = () => {};
+  editProfile(userName, userAbout) {
+    return fetch(`${this._url}/users/me`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: userName,
+        about: userAbout
+      })
+    });
+  }
 
   addNewCard(name, link) {
     return fetch(`${this._url}/cards`, {
@@ -41,12 +53,15 @@ export default class Api {
         authorization: this._token,
         'content-type': 'application/json'
       },
-      body: JSON.stringify({name: name, link: link})
+      body: JSON.stringify({
+        name: name,
+        link: link
+      })
     }).then(response => {
       if (response.ok) {
-        return {name, link};
+        return response.json();
       } else {
-        return Promise.reject(`Error: ${res.status}`);
+        return Promise.reject(`Error: ${response.status}`);
       }
     });
   }

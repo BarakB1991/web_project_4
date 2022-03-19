@@ -19,6 +19,7 @@ import {
 } from '../utils/constants.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
+import {debug} from 'webpack';
 
 const api = new Api({
   baseUrl: 'https://around.nomoreparties.co/v1/group-12',
@@ -44,13 +45,22 @@ const cardSection = new Section('.cards__list', {
   renderer: renderCard
 });
 
-const profilePopupWindow = new PopupWithForm('.popup_type_edit-profile', data => {
-  userInfo.setUserInfo(data);
+const profilePopupWindow = new PopupWithForm('.popup_type_edit-profile', async ({userName, userAbout}) => {
+  debugger;
+  const promiseInfo = await api.editProfile(userName, userAbout);
+  if (promiseInfo) {
+    userInfo.setUserInfo({userName, userAbout});
+  } else {
+    return err => console.log(err.status, err, statusText);
+  }
 });
 
-const addCardPopupWindow = new PopupWithForm('.popup_type_add-card', data => {
+const addCardPopupWindow = new PopupWithForm('.popup_type_add-card', async data => {
   const {cardtitle: name, imagelink: link} = data;
-  renderCard({name, link});
+  const card = await api.addNewCard(name, link);
+  if (card) {
+    renderCard({name, link});
+  }
 });
 
 // imagePopupWindow.setEventListeners();
@@ -70,9 +80,10 @@ const profileFormValidator = new FormValidator(formSettings, editProfilePopup);
 
 profileEditButton.addEventListener('click', () => {
   profilePopupWindow.open();
-  const {name, profession} = userInfo.getUserInfo(); // get object of current name and profession
-  nameInput.value = name;
-  professionInput.value = profession;
+
+  const {userName, userAbout} = userInfo.getUserInfo(); // get object of current name and profession
+  nameInput.value = userName;
+  professionInput.value = userAbout;
 });
 
 profileAddCardFormButton.addEventListener('click', () => {
@@ -84,19 +95,13 @@ cardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
 
 api
-  .getInitialCards()
-  .then(cards => {
-    cardSection.renderer(cards);
-  })
-  .catch(err => console.log(err.status, err.statusText));
-
-api
-  .getUserData()
-  .then(userData => {
+  .promiseCardsAndUserData()
+  .then(([userData, cards]) => {
     userInfo.setUserInfo({
       userName: userData.name,
       userAbout: userData.about
     });
     userInfo.setUserAvatar(userData.avatar);
+    cardSection.renderer(cards);
   })
   .catch(err => console.log(err.status, err.statusText));
