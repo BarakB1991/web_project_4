@@ -84,15 +84,18 @@ cardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
 
 api.getInitialCards().then(cards => {
-  return cardSection.renderer(cards);
+  cardSection.renderer(cards);
 });
 
-api.getUserData().then(me => {
-  userInfo.setUserInfo({
-    name: me.name,
-    profession: me.about,
-    avatar: me.avatar
-    // _id: 'e20537ed11237f86bbb20ccb',
-    // cohort: 'group-42'
-  });
-});
+api.getUserData().then(
+  me => {
+    userInfo.setUserInfo({
+      name: me.name,
+      profession: me.about
+    });
+    userInfo.setUserAvatar(me.avatar);
+  }
+
+  // _id: 'e20537ed11237f86bbb20ccb',
+  // cohort: 'group-42'
+);
