@@ -2,6 +2,9 @@ export default class Card {
   constructor(cardData, cardTemplateSelector, onImageClick) {
     this._name = cardData.name;
     this._link = cardData.link;
+    debugger;
+    this._likeCounter = cardData.likes;
+    console.log(this._counter);
     this._template = document.querySelector(cardTemplateSelector).content.querySelector('.card');
 
     this._onImageClick = onImageClick;
@@ -36,8 +39,10 @@ export default class Card {
   renderCard = () => {
     this._element = this._template.cloneNode(true);
     const cardImage = this._element.querySelector('.card__img');
+    const cardLikeCounter = this._element.querySelector('.card__like-counter');
     cardImage.src = this._link;
     cardImage.alt = this._name;
+    cardLikeCounter.textContent = this._likeCounter;
     this._element.querySelector('.card__title').textContent = this._name;
     this._addEventListeners();
 
