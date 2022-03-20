@@ -19,7 +19,6 @@ import {
 } from '../utils/constants.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
-import {debug} from 'webpack';
 
 const api = new Api({
   baseUrl: 'https://around.nomoreparties.co/v1/group-12',
@@ -45,13 +44,10 @@ const cardSection = new Section('.cards__list', {
   renderer: renderCard
 });
 
-const profilePopupWindow = new PopupWithForm('.popup_type_edit-profile', async ({userName, userAbout}) => {
-  debugger;
+const profilePopupWindow = new PopupWithForm('.popup_type_edit-profile', async ({name: userName, profession: userAbout}) => {
   const promiseInfo = await api.editProfile(userName, userAbout);
-  if (promiseInfo) {
+  if (Promise.resolve(promiseInfo)) {
     userInfo.setUserInfo({userName, userAbout});
-  } else {
-    return err => console.log(err.status, err, statusText);
   }
 });
 
@@ -63,7 +59,6 @@ const addCardPopupWindow = new PopupWithForm('.popup_type_add-card', async data 
   }
 });
 
-// imagePopupWindow.setEventListeners();
 profilePopupWindow.setEventListeners();
 addCardPopupWindow.setEventListeners();
 
@@ -80,7 +75,6 @@ const profileFormValidator = new FormValidator(formSettings, editProfilePopup);
 
 profileEditButton.addEventListener('click', () => {
   profilePopupWindow.open();
-
   const {userName, userAbout} = userInfo.getUserInfo(); // get object of current name and profession
   nameInput.value = userName;
   professionInput.value = userAbout;
