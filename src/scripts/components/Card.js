@@ -2,7 +2,6 @@ export default class Card {
   constructor(cardData, cardTemplateSelector, onImageClick) {
     this._name = cardData.name;
     this._link = cardData.link;
-    debugger;
     this._likeCounter = cardData.likes;
     console.log(this._counter);
     this._template = document.querySelector(cardTemplateSelector).content.querySelector('.card');
@@ -22,9 +21,11 @@ export default class Card {
   };
 
   _handleDeleteButton = evt => {
-    evt.stopPropagation();
-    this._element.remove();
-    this._element = null;
+    const confirmationPopup = document.querySelector('.popup_type_confirm');
+    confirmationPopup.classList.add('popup_visible');
+    // evt.stopPropagation();
+    // this._element.remove();
+    // this._element = null;
   };
 
   _handleLikeButton = evt => {
@@ -42,7 +43,7 @@ export default class Card {
     const cardLikeCounter = this._element.querySelector('.card__like-counter');
     cardImage.src = this._link;
     cardImage.alt = this._name;
-    cardLikeCounter.textContent = this._likeCounter;
+    cardLikeCounter.textContent = this._likeCounter.length;
     this._element.querySelector('.card__title').textContent = this._name;
     this._addEventListeners();
 
