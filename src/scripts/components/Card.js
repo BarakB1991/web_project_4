@@ -3,9 +3,9 @@ export default class Card {
     this._name = cardData.name;
     this._link = cardData.link;
     this._likeCounter = cardData.likes;
-    console.log(this._counter);
-    this._template = document.querySelector(cardTemplateSelector).content.querySelector('.card');
+    this._template = document.querySelector;
 
+    cardTemplateSelector.content.querySelector('.card');
     this._onImageClick = onImageClick;
   }
 
@@ -20,12 +20,10 @@ export default class Card {
     previewPicture.addEventListener('click', () => this._handlePreviewPicture());
   };
 
-  _handleDeleteButton = evt => {
-    const confirmationPopup = document.querySelector('.popup_type_confirm');
-    confirmationPopup.classList.add('popup_visible');
-    // evt.stopPropagation();
-    // this._element.remove();
-    // this._element = null;
+  _handleDeleteButton = () => {
+    evt.stopPropagation();
+    this._element.remove();
+    this._element = null;
   };
 
   _handleLikeButton = evt => {

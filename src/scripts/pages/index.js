@@ -4,7 +4,7 @@ import Card from '../components/Card.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage';
 import PopupWithForm from '../components/PopupWithForm';
-
+import Popup from '../components/Popup.js';
 import {
   editProfilePopup,
   addCardPopup,
@@ -51,11 +51,13 @@ const profilePopupWindow = new PopupWithForm('.popup_type_edit-profile', async (
   }
 });
 
+// const confirmationPopup = new Popup('.popup_type_confirm');
+
 const addCardPopupWindow = new PopupWithForm('.popup_type_add-card', async data => {
   const {cardtitle: name, imagelink: link} = data;
   const card = await api.addNewCard(name, link);
   if (card) {
-    renderCard({name, link});
+    renderCard({name, link, likes: []});
   }
 });
 
@@ -98,4 +100,4 @@ api
     userInfo.setUserAvatar(userData.avatar);
     cardSection.renderer(cards);
   })
-  .catch(err => console.log(err.status, err.statusText));
+  .catch(err => console.log(err.status));
