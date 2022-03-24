@@ -15,31 +15,49 @@ import {
   profileEditButton,
   profileAddCardFormButton,
   cardTemplateSelector,
-  profileAvatar
+  profileAvatar,
+  profileContainer,
+  formSettings
 } from '../utils/constants.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
+
+const userInfo = new UserInfo({
+  userName: profileName,
+  userAbout: profileProfession,
+  avatar: profileAvatar,
+  userId: profileContainer
+});
 
 const api = new Api({
   baseUrl: 'https://around.nomoreparties.co/v1/group-12',
   token: 'c785e696-84a9-4aca-b3d2-750b2694b444'
 });
 
-const userInfo = new UserInfo({
-  userName: profileName,
-  userAbout: profileProfession,
-  avatar: profileAvatar
-});
-
 const imagePopupWindow = new PopupWithImage('.popup_type_image');
 // Initialize  cards
 
 function renderCard(item) {
-  const card = new Card(item, cardTemplateSelector, imagePopupWindow.open);
+  const card = new Card({
+    cardData: item,
+    cardTemplateSelector,
+    onImageClick: imagePopupWindow.open,
+    userId: profileContainer.id,
+    handleDeleteButton: cardId => {
+      const confirmationPopup = new PopupWithForm('.popup_type_confirm', evt => {
+        // evt.stopPropagation();
+        // console.log(EventTarget);
+        // this._element = null;
+      });
+      confirmationPopup.open();
+      confirmationPopup.setEventListeners();
+    }
+  });
   const cardElement = card.renderCard();
   cardSection.addItem(cardElement);
 }
 
+//Initializa Cards
 const cardSection = new Section('.cards__list', {
   renderer: renderCard
 });
@@ -51,8 +69,6 @@ const profilePopupWindow = new PopupWithForm('.popup_type_edit-profile', async (
   }
 });
 
-// const confirmationPopup = new Popup('.popup_type_confirm');
-
 const addCardPopupWindow = new PopupWithForm('.popup_type_add-card', async data => {
   const {cardtitle: name, imagelink: link} = data;
   const card = await api.addNewCard(name, link);
@@ -63,14 +79,6 @@ const addCardPopupWindow = new PopupWithForm('.popup_type_add-card', async data 
 
 profilePopupWindow.setEventListeners();
 addCardPopupWindow.setEventListeners();
-
-const formSettings = {
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit-btn',
-  inactiveButtonClass: 'popup__submit-btn_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-};
 
 const cardFormValidator = new FormValidator(formSettings, addCardPopup);
 const profileFormValidator = new FormValidator(formSettings, editProfilePopup);
@@ -98,6 +106,7 @@ api
       userAbout: userData.about
     });
     userInfo.setUserAvatar(userData.avatar);
+    userInfo.setUserId(userData._id);
     cardSection.renderer(cards);
   })
-  .catch(err => console.log(err.status));
+  .catch(err => console.log(err));

@@ -1,29 +1,33 @@
+import {profileContainer} from '../utils/constants';
+
 export default class Card {
-  constructor(cardData, cardTemplateSelector, onImageClick) {
+  constructor({cardData, cardTemplateSelector, onImageClick, userId, handleDeleteButton}) {
+    console.log(cardData);
     this._name = cardData.name;
     this._link = cardData.link;
+    this._id = cardData.owner._id;
     this._likeCounter = cardData.likes;
-    this._template = document.querySelector;
-
-    cardTemplateSelector.content.querySelector('.card');
+    this._template = document.querySelector(cardTemplateSelector).content.querySelector('.card');
     this._onImageClick = onImageClick;
+    this._userId = userId;
+    this._handleDeleteButton = handleDeleteButton;
   }
 
   _addEventListeners = () => {
     const likeButton = this._element.querySelector('.card__like-btn');
     likeButton.addEventListener('click', this._handleLikeButton);
-
     const deleteCardButton = this._element.querySelector('.card__delete-btn');
-    deleteCardButton.addEventListener('click', this._handleDeleteButton);
-
+    if (this._id === this._userId) {
+      deleteCardButton.addEventListener('click', this._handleDeleteButton);
+    } else {
+      deleteCardButton.remove();
+    }
     const previewPicture = this._element.querySelector('.card__img');
     previewPicture.addEventListener('click', () => this._handlePreviewPicture());
   };
 
-  _handleDeleteButton = () => {
-    evt.stopPropagation();
-    this._element.remove();
-    this._element = null;
+  _handleDeleteButton = evt => {
+    this._handleDeleteButton(evt);
   };
 
   _handleLikeButton = evt => {
@@ -41,6 +45,7 @@ export default class Card {
     const cardLikeCounter = this._element.querySelector('.card__like-counter');
     cardImage.src = this._link;
     cardImage.alt = this._name;
+    this._element.id = this._id;
     cardLikeCounter.textContent = this._likeCounter.length;
     this._element.querySelector('.card__title').textContent = this._name;
     this._addEventListeners();

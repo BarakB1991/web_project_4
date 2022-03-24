@@ -27,3 +27,11 @@ export const profileAddCardFormButton = profileContainer.querySelector('.profile
 
 export const cardTemplateSelector = '#card-template';
 export const cardsContainer = document.querySelector('.cards__list');
+
+export const formSettings = {
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-btn',
+  inactiveButtonClass: 'popup__submit-btn_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
