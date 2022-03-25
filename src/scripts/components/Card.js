@@ -4,25 +4,23 @@ export default class Card {
   constructor({cardData, cardTemplateSelector, onImageClick, userId, handleDeleteCardclick}) {
     this._name = cardData.name;
     this._link = cardData.link;
-    this._id = cardData.owner._id;
+    this._cardUserId = cardData.owner._id;
+    this._userId = userId;
     this._cardId = cardData._id;
     this._likeCounter = cardData.likes;
-    this._template = document.querySelector(cardTemplateSelector).content.querySelector('.card');
     this._onImageClick = onImageClick;
-    this._userId = userId;
     this._handleDeleteCardclick = handleDeleteCardclick;
-  }
 
-  getId = () => {
-    return this._cardId;
-  };
+    this._template = document.querySelector(cardTemplateSelector).content.querySelector('.card');
+  }
 
   _addEventListeners = () => {
     const likeButton = this._element.querySelector('.card__like-btn');
     likeButton.addEventListener('click', this._handleLikeButton);
     const deleteCardButton = this._element.querySelector('.card__delete-btn');
-    if (this._id === this._userId) {
-      deleteCardButton.addEventListener('click', this._handleDeleteCardclick());
+    if (this._cardUserId === this._userId) {
+      debugger;
+      deleteCardButton.addEventListener('click', () => this._handleDeleteCardclick(this._cardId));
     } else {
       deleteCardButton.remove();
     }
@@ -30,8 +28,12 @@ export default class Card {
     previewPicture.addEventListener('click', () => this._handlePreviewPicture());
   };
 
-  removeCardElement = evt => {
-    evt.preventDefault();
+  // _handleDeleteCard = evt => {
+  //   evt.preventDefault();
+  //
+  // };
+
+  removeCardElement = () => {
     this._element.remove();
     this._element = null;
   };
@@ -51,7 +53,7 @@ export default class Card {
     const cardLikeCounter = this._element.querySelector('.card__like-counter');
     cardImage.src = this._link;
     cardImage.alt = this._name;
-    this._element.id = this._id;
+    this._element.id = this._cardUserId;
     cardLikeCounter.textContent = this._likeCounter.length;
     this._element.querySelector('.card__title').textContent = this._name;
     this._addEventListeners();

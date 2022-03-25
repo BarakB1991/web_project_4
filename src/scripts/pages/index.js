@@ -37,24 +37,24 @@ const api = new Api({
 const confirmationPopup = new PopupWithConfirmation('.popup_type_confirm');
 
 const imagePopupWindow = new PopupWithImage('.popup_type_image');
-// Initialize  cards
-function deleteConfirmationHandler(cardId) {
-  confirmationPopup.open();
-  confirmationPopup.submitHandler(async cardId => {
-    const promiseDelete = await api.removeUserCard(cardId);
-    if (Promise.resolve(promiseDelete)) {
-      card.removeCardElement();
-    }
-  });
-}
 
+// Initialize  cards
 function renderCard(item) {
   const card = new Card({
     cardData: item,
     cardTemplateSelector,
     onImageClick: imagePopupWindow.open,
     userId: profileContainer.id,
-    handleDeleteCardclick: deleteConfirmationHandler
+    handleDeleteCardclick: id => {
+      confirmationPopup.open();
+      confirmationPopup.submitHandler(evt => {
+        evt.preventDefault();
+        api.removeUserCard(id).then(() => {
+          card.removeCardElement();
+          confirmationPopup.close();
+        });
+      });
+    }
   });
   const cardElement = card.renderCard();
   cardSection.addItem(cardElement);

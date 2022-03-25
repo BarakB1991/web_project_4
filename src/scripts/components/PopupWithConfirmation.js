@@ -6,9 +6,8 @@ export default class PopupWithConfirmation extends Popup {
     this._form = this._popup.querySelector('.popup__form');
   }
 
-  submitHandler(cardId) {
-    this._cardId = cardId;
-    this.close();
+  submitHandler(call, evt) {
+    this._submitHandler = call;
   }
 
   open() {
