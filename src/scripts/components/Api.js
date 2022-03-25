@@ -66,7 +66,21 @@ export default class Api {
     });
   }
 
-  removeUserCard = () => {};
+  removeUserCard = cardId => {
+    return fetch(`${this._url}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._token,
+        'content-type': 'application/json'
+      }
+    }).then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        return Promise.reject(`Error: ${response.status}`);
+      }
+    });
+  };
 
   getLikeCount = () => {};
 
