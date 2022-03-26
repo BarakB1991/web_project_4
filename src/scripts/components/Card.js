@@ -1,43 +1,45 @@
 export default class Card {
-  constructor({cardData, cardTemplateSelector, onImageClick, userId, handleDeleteCardClick}) {
+  constructor({cardData, cardTemplateSelector, onImageClick, userId, handleDeleteCardClick, handleLikeCardClick}) {
     this._name = cardData.name;
     this._link = cardData.link;
     this._cardUserId = cardData.owner._id;
-    this._userId = userId;
     this._cardId = cardData._id;
     this._likeCounter = cardData.likes;
+    this._userId = userId;
+
     this._onImageClick = onImageClick;
     this._handleDeleteCardClick = handleDeleteCardClick;
+    this._handleLikeCardClick = handleLikeCardClick;
 
     this._template = document.querySelector(cardTemplateSelector).content.querySelector('.card');
   }
 
   _addEventListeners = () => {
     const likeButton = this._element.querySelector('.card__like-btn');
-    likeButton.addEventListener('click', this._handleLikeButton);
+    likeButton.addEventListener('click', () => this._handleLikeCardClick(this._cardId, this._userId));
+
     const deleteCardButton = this._element.querySelector('.card__delete-btn');
     if (this._cardUserId === this._userId) {
       deleteCardButton.addEventListener('click', () => this._handleDeleteCardClick(this._cardId));
     } else {
       deleteCardButton.remove();
     }
+
     const previewPicture = this._element.querySelector('.card__img');
     previewPicture.addEventListener('click', () => this._handlePreviewPicture());
   };
-
-  // _handleDeleteCard = evt => {
-  //   evt.preventDefault();
-  //
-  // };
 
   removeCardElement = () => {
     this._element.remove();
     this._element = null;
   };
 
-  _handleLikeButton = evt => {
-    evt.stopPropagation();
-    evt.target.classList.toggle('card__like-btn_active');
+  removeLikeButton = evt => {
+    this._element.classList.remove('card__like-btn_active');
+  };
+
+  addLikeButton = evt => {
+    this._element.classList.add('card__like-btn_active');
   };
 
   _handlePreviewPicture = () => {

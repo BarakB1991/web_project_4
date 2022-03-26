@@ -41,7 +41,7 @@ const imagePopupWindow = new PopupWithImage('.popup_type_image');
 
 // Initialize  cards
 function renderCard(item) {
-  const card = new Card({
+  const newCard = new Card({
     cardData: item,
     cardTemplateSelector,
     onImageClick: imagePopupWindow.open,
@@ -49,14 +49,49 @@ function renderCard(item) {
     handleDeleteCardClick: id => {
       confirmationPopup.open();
       confirmationPopup.submitHandler(() => {
-        api.removeUserCard(id).then(() => {
-          card.removeCardElement();
-          confirmationPopup.close();
-        });
+        api
+          .removeUserCard(id)
+          .then(confirmationPopup.renderLoadingOnButton())
+          .then(() => {
+            newCard.removeCardElement();
+          })
+          .catch(err => console.log(err))
+          .finally(() => {
+            confirmationPopup.close();
+            confirmationPopup.removeLoadingOnButton();
+          });
       });
+    },
+    handleLikeCardClick: (cardId, userId, evt) => {
+      api
+        .getInitialCards()
+        .then(cards => {
+          cards.forEach(card => {
+            if (card._id === cardId) {
+              card.likes.forEach(like => {
+                if (like._id === userId) {
+                  api.removeLike(cardId);
+                  newCard.removeLikeButton(evt);
+                } else {
+                  api.addLike(cardId);
+                  newCard.addLikeButton(evt);
+                }
+              });
+            }
+          });
+        })
+        // .then(cardID => {
+        //   console.log(cardID);
+        //   if (cardID) {
+        //     api.removeLike(cardId);
+        //   } else {
+        //     api.addLike(cardId);
+        //   }
+        // })
+        .catch(err => console.log(err));
     }
   });
-  const cardElement = card.renderCard();
+  const cardElement = newCard.renderCard();
   cardSection.addItem(cardElement);
 }
 

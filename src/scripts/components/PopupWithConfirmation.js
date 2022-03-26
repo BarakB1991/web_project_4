@@ -14,9 +14,16 @@ export default class PopupWithConfirmation extends Popup {
     this._form.addEventListener('submit', evt => {
       evt.preventDefault();
       this._submitHandler();
-      this.close();
     });
   };
+
+  renderLoadingOnButton() {
+    this._form.querySelector('button[type="submit"]').textContent = 'Loading...';
+  }
+
+  removeLoadingOnButton() {
+    this._form.querySelector('button[type="submit"]').textContent = 'Yes';
+  }
 
   open() {
     super.open();
