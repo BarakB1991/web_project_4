@@ -1,7 +1,5 @@
-import {profileContainer} from '../utils/constants';
-
 export default class Card {
-  constructor({cardData, cardTemplateSelector, onImageClick, userId, handleDeleteCardclick}) {
+  constructor({cardData, cardTemplateSelector, onImageClick, userId, handleDeleteCardClick}) {
     this._name = cardData.name;
     this._link = cardData.link;
     this._cardUserId = cardData.owner._id;
@@ -9,7 +7,7 @@ export default class Card {
     this._cardId = cardData._id;
     this._likeCounter = cardData.likes;
     this._onImageClick = onImageClick;
-    this._handleDeleteCardclick = handleDeleteCardclick;
+    this._handleDeleteCardClick = handleDeleteCardClick;
 
     this._template = document.querySelector(cardTemplateSelector).content.querySelector('.card');
   }
@@ -19,8 +17,7 @@ export default class Card {
     likeButton.addEventListener('click', this._handleLikeButton);
     const deleteCardButton = this._element.querySelector('.card__delete-btn');
     if (this._cardUserId === this._userId) {
-      debugger;
-      deleteCardButton.addEventListener('click', () => this._handleDeleteCardclick(this._cardId));
+      deleteCardButton.addEventListener('click', () => this._handleDeleteCardClick(this._cardId));
     } else {
       deleteCardButton.remove();
     }

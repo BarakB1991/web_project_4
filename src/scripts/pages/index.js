@@ -35,6 +35,7 @@ const api = new Api({
 });
 
 const confirmationPopup = new PopupWithConfirmation('.popup_type_confirm');
+confirmationPopup.setEventListeners();
 
 const imagePopupWindow = new PopupWithImage('.popup_type_image');
 
@@ -45,10 +46,9 @@ function renderCard(item) {
     cardTemplateSelector,
     onImageClick: imagePopupWindow.open,
     userId: profileContainer.id,
-    handleDeleteCardclick: id => {
+    handleDeleteCardClick: id => {
       confirmationPopup.open();
-      confirmationPopup.submitHandler(evt => {
-        evt.preventDefault();
+      confirmationPopup.submitHandler(() => {
         api.removeUserCard(id).then(() => {
           card.removeCardElement();
           confirmationPopup.close();
@@ -76,7 +76,7 @@ const addCardPopupWindow = new PopupWithForm('.popup_type_add-card', async data 
   const {cardtitle: name, imagelink: link} = data;
   const card = await api.addNewCard(name, link);
   if (card) {
-    renderCard({name, link, likes: []});
+    renderCard(card);
   }
 });
 
