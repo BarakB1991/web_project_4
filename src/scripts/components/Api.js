@@ -121,7 +121,7 @@ export default class Api {
         authorization: this._token,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(avatar)
+      body: JSON.stringify({avatar})
     }).then(response => {
       if (response.ok) {
         return response.json();

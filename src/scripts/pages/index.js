@@ -106,7 +106,6 @@ const addCardPopupWindow = new PopupWithForm('.popup_type_add-card', async data 
 const editAvatarPopupWindow = new PopupWithForm('#edit-avatar-form', async avatar => {
   const {avatar: avatarUrl} = avatar;
   editAvatarPopupWindow.renderLoadingOnButton();
-  debugger;
   const sendAvatar = await api.editAvatar(avatarUrl);
   if (Promise.resolve(sendAvatar)) {
     userInfo.setUserAvatar(avatarUrl);
