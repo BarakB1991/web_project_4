@@ -8,7 +8,9 @@
 @import url(../blocks/logo/logo.css);
 
 @import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__img-container/profile__img-container.css);
 @import url(../blocks/profile/__img/profile__img.css);
+@import url(../blocks/profile/__img-button/profile__img-button.css);
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__header/profile__header.css);
 @import url(../blocks/profile/__name/profile__name.css);

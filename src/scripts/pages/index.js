@@ -8,6 +8,7 @@ import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 import {
   editProfilePopup,
   addCardPopup,
+  editAvatarPopup,
   professionInput,
   nameInput,
   profileName,
@@ -17,6 +18,7 @@ import {
   cardTemplateSelector,
   profileAvatar,
   profileContainer,
+  profileAvatarButton,
   formSettings
 } from '../utils/constants.js';
 import UserInfo from '../components/UserInfo.js';
@@ -101,11 +103,32 @@ const addCardPopupWindow = new PopupWithForm('.popup_type_add-card', async data 
   }
 });
 
+const editAvatarPopupWindow = new PopupWithForm('#edit-avatar-form', async avatar => {
+  const {avatar: avatarUrl} = avatar;
+  editAvatarPopupWindow.renderLoadingOnButton();
+  debugger;
+  const sendAvatar = await api.editAvatar(avatarUrl);
+  if (Promise.resolve(sendAvatar)) {
+    userInfo.setUserAvatar(avatarUrl);
+    editAvatarPopupWindow.close();
+    editAvatarPopupWindow.removeLoadingOnButton();
+  } else {
+    console.log(Promise.reject(sendAvatar));
+  }
+});
+
 profilePopupWindow.setEventListeners();
 addCardPopupWindow.setEventListeners();
+editAvatarPopupWindow.setEventListeners();
 
 const cardFormValidator = new FormValidator(formSettings, addCardPopup);
 const profileFormValidator = new FormValidator(formSettings, editProfilePopup);
+const avatarFormValidator = new FormValidator(formSettings, editAvatarPopup);
+
+profileAvatarButton.addEventListener('click', () => {
+  editAvatarPopupWindow.open();
+  avatarFormValidator.resetValidation();
+});
 
 profileEditButton.addEventListener('click', () => {
   profilePopupWindow.open();
@@ -121,6 +144,7 @@ profileAddCardFormButton.addEventListener('click', () => {
 
 cardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
 
 api
   .promiseCardsAndUserData()

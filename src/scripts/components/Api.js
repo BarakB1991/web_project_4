@@ -114,5 +114,20 @@ export default class Api {
     });
   };
 
-  patchAvatar = () => {};
+  editAvatar = avatar => {
+    return fetch(`${this._url}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(avatar)
+    }).then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        return Promise.reject(`Error: ${response.status}`);
+      }
+    });
+  };
 }

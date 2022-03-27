@@ -19,9 +19,7 @@ export default class Card {
   }
 
   updateLikeCounter(cardData) {
-    console.log(cardData);
     this._likeCounter = cardData.likes;
-
     this.renderLikeContainer();
   }
 
