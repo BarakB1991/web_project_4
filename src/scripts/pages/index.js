@@ -81,17 +81,23 @@ const cardSection = new Section('.cards__list', {
 });
 
 const profilePopupWindow = new PopupWithForm('.popup_type_edit-profile', async ({name: userName, profession: userAbout}) => {
+  profilePopupWindow.renderLoadingOnButton();
   const promiseInfo = await api.editProfile(userName, userAbout);
   if (Promise.resolve(promiseInfo)) {
     userInfo.setUserInfo({userName, userAbout});
+    profilePopupWindow.close();
+    profilePopupWindow.removeLoadingOnButton();
   }
 });
 
 const addCardPopupWindow = new PopupWithForm('.popup_type_add-card', async data => {
   const {cardtitle: name, imagelink: link} = data;
+  addCardPopupWindow.renderLoadingOnButton();
   const card = await api.addNewCard(name, link);
   if (card) {
     renderCard(card);
+    addCardPopupWindow.close();
+    addCardPopupWindow.removeLoadingOnButton();
   }
 });
 

@@ -32,6 +32,11 @@ export default class Card {
     !this.isLikedByUser() ? this._removeLikeButton() : this._addLikeButton();
   };
 
+  removeCardElement = () => {
+    this._element.remove();
+    this._element = null;
+  };
+
   _addEventListeners = () => {
     const likeButton = this._element.querySelector('.card__like-btn');
     likeButton.addEventListener('click', evt => this._handleLikeCardClick(this._cardId));
@@ -45,11 +50,6 @@ export default class Card {
 
     const previewPicture = this._element.querySelector('.card__img');
     previewPicture.addEventListener('click', () => this._handlePreviewPicture());
-  };
-
-  removeCardElement = () => {
-    this._element.remove();
-    this._element = null;
   };
 
   _removeLikeButton = () => {
