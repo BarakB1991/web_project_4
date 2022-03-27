@@ -2,6 +2,7 @@
 export const editProfilePopup = document.querySelector('.popup_type_edit-profile');
 export const addCardPopup = document.querySelector('.popup_type_add-card');
 export const editAvatarPopup = document.querySelector('.popup_type_edit-avatar');
+
 export const profileContainer = document.querySelector('.profile');
 export const profileName = profileContainer.querySelector('.profile__name');
 export const profileProfession = profileContainer.querySelector('.profile__about');
@@ -34,6 +35,3 @@ export const editProfileForm = document.querySelector('#edit-profile-form');
 
 export const nameInput = editProfileForm.querySelector('#input-name');
 export const professionInput = editProfileForm.querySelector('#input-profession');
-
-export const cardInputTitle = cardAddForm.querySelector('#input-card-title');
-export const imageInputLink = cardAddForm.querySelector('#input-image-link');

@@ -103,7 +103,7 @@ const addCardPopupWindow = new PopupWithForm('.popup_type_add-card', async data 
   }
 });
 
-const editAvatarPopupWindow = new PopupWithForm('#edit-avatar-form', async avatar => {
+const editAvatarPopupWindow = new PopupWithForm('.popup_type_edit-avatar', async avatar => {
   const {avatar: avatarUrl} = avatar;
   editAvatarPopupWindow.renderLoadingOnButton();
   const sendAvatar = await api.editAvatar(avatarUrl);
