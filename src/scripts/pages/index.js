@@ -62,33 +62,13 @@ function renderCard(item) {
           });
       });
     },
-    handleLikeCardClick: (cardId, userId, evt) => {
-      api
-        .getInitialCards()
-        .then(cards => {
-          cards.forEach(card => {
-            if (card._id === cardId) {
-              card.likes.forEach(like => {
-                if (like._id === userId) {
-                  api.removeLike(cardId);
-                  newCard.removeLikeButton(evt);
-                } else {
-                  api.addLike(cardId);
-                  newCard.addLikeButton(evt);
-                }
-              });
-            }
-          });
-        })
-        // .then(cardID => {
-        //   console.log(cardID);
-        //   if (cardID) {
-        //     api.removeLike(cardId);
-        //   } else {
-        //     api.addLike(cardId);
-        //   }
-        // })
-        .catch(err => console.log(err));
+    handleLikeCardClick: id => {
+      const isLikedByUser = newCard.isLikedByUser();
+      if (isLikedByUser == true) {
+        api.removeLike(id).then(card => newCard.updateLikeCounter(card));
+      } else {
+        api.addLike(id).then(card => newCard.updateLikeCounter(card));
+      }
     }
   });
   const cardElement = newCard.renderCard();

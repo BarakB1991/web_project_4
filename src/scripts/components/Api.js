@@ -82,22 +82,6 @@ export default class Api {
     });
   };
 
-  // getOwnerLikeStatus = (cardId, userId) => {
-  //   return fetch(`${this._url}/cards/${cardId}/likes/${userId}`, {
-  //     method: 'GET',
-  //     headers: {
-  //       authorization: this._token,
-  //       'content-type': 'application/json'
-  //     }
-  //   }).then(response => {
-  //     if (response.ok) {
-  //       return response.json();
-  //     } else {
-  //       return Promise.reject(`Error: ${response.status}`);
-  //     }
-  //   });
-  // };
-
   addLike = cardId => {
     return fetch(`${this._url}/cards/likes/${cardId}`, {
       method: 'PUT',
@@ -129,8 +113,6 @@ export default class Api {
       }
     });
   };
-
-  changeLikeStatus = () => {};
 
   patchAvatar = () => {};
 }
