@@ -114,7 +114,6 @@ const addCardPopupWindow = new PopupWithForm('.popup_type_add-card', async data 
     if (response) {
       renderCard(response);
       addCardPopupWindow.close();
-      addCardPopupWindow.removeLoadingOnButton();
     }
   } catch (error) {
     console.log(`Could not perform request: ${error}`);
@@ -130,7 +129,6 @@ const editAvatarPopupWindow = new PopupWithForm('.popup_type_edit-avatar', async
     if (response) {
       userInfo.setUserAvatar(avatarUrl);
       editAvatarPopupWindow.close();
-      editAvatarPopupWindow.removeLoadingOnButton();
     }
   } catch (error) {
     console.log(`Could not perform request: ${error}`);
