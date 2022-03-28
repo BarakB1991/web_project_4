@@ -36,7 +36,7 @@ export default class Card {
   };
 
   _addEventListeners = () => {
-    this._likeButton.addEventListener('click', evt => this._handleLikeCardClick(this._cardId));
+    this._likeButton.addEventListener('click', () => this._handleLikeCardClick(this._cardId));
 
     const deleteCardButton = this._element.querySelector('.card__delete-btn');
     if (this._cardUserId === this._userId) {

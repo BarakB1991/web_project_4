@@ -37,7 +37,6 @@ const api = new Api({
 });
 
 const confirmationPopup = new PopupWithConfirmation('.popup_type_confirm');
-confirmationPopup.setEventListeners();
 
 const imagePopupWindow = new PopupWithImage('.popup_type_image');
 
