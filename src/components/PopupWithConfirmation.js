@@ -6,14 +6,14 @@ export default class PopupWithConfirmation extends Popup {
     this._form = this._popup.querySelector('.popup__form');
   }
 
-  submitHandler(call) {
-    this._submitHandler = call;
+  setSubmitHandler(call) {
+    this._handleSubmit = call;
   }
 
   setEventListeners = () => {
     this._form.addEventListener('submit', evt => {
       evt.preventDefault();
-      this._submitHandler();
+      this._handleSubmit();
     });
   };
 
@@ -23,13 +23,5 @@ export default class PopupWithConfirmation extends Popup {
 
   removeLoadingOnButton() {
     this._form.querySelector('button[type="submit"]').textContent = 'Yes';
-  }
-
-  open() {
-    super.open();
-  }
-
-  close() {
-    super.close();
   }
 }

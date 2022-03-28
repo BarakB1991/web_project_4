@@ -20,10 +20,10 @@ export default class Card {
 
   updateLikeCounter(cardData) {
     this._likeCounter = cardData.likes;
-    this.renderLikeContainer();
+    this._renderLikeContainer();
   }
 
-  renderLikeContainer = () => {
+  _renderLikeContainer = () => {
     const likeCounter = this._element.querySelector('.card__like-counter');
     likeCounter.textContent = this._likeCounter.length;
 
@@ -36,8 +36,7 @@ export default class Card {
   };
 
   _addEventListeners = () => {
-    const likeButton = this._element.querySelector('.card__like-btn');
-    likeButton.addEventListener('click', evt => this._handleLikeCardClick(this._cardId));
+    this._likeButton.addEventListener('click', evt => this._handleLikeCardClick(this._cardId));
 
     const deleteCardButton = this._element.querySelector('.card__delete-btn');
     if (this._cardUserId === this._userId) {
@@ -51,13 +50,11 @@ export default class Card {
   };
 
   _removeLikeButton = () => {
-    const likeButton = this._element.querySelector('.card__like-btn');
-    likeButton.classList.remove('card__like-btn_active');
+    this._likeButton.classList.remove('card__like-btn_active');
   };
 
   _addLikeButton = () => {
-    const likeButton = this._element.querySelector('.card__like-btn');
-    likeButton.classList.add('card__like-btn_active');
+    this._likeButton.classList.add('card__like-btn_active');
   };
 
   _handlePreviewPicture = () => {
@@ -70,12 +67,12 @@ export default class Card {
     const cardLikeCounter = this._element.querySelector('.card__like-counter');
     cardImage.src = this._link;
     cardImage.alt = this._name;
-    this._element.id = this._cardUserId;
     cardLikeCounter.textContent = this._likeCounter.length;
     this._element.querySelector('.card__title').textContent = this._name;
+    this._likeButton = this._element.querySelector('.card__like-btn');
     this._addEventListeners();
 
-    this.renderLikeContainer();
+    this._renderLikeContainer();
 
     return this._element;
   };

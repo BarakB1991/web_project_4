@@ -4,32 +4,20 @@ export default class Api {
     this._token = options.token;
   }
 
-  promiseCardsAndUserData() {
+  getCardsAndUserData() {
     return Promise.all([this.getUserData(), this.getInitialCards()]);
   }
 
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
       headers: {authorization: this._token}
-    }).then(res => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Error: ${res.status}`);
-      }
-    });
+    }).then(res => this._getResponseData(res));
   }
 
   getUserData() {
     return fetch(`${this._url}/users/me`, {
       headers: {authorization: this._token}
-    }).then(res => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Error: ${res.status}`);
-      }
-    });
+    }).then(res => this._getResponseData(res));
   }
 
   editProfile(userName, userAbout) {
@@ -43,7 +31,7 @@ export default class Api {
         name: userName,
         about: userAbout
       })
-    });
+    }).then(res => this._getResponseData(res));
   }
 
   addNewCard(name, link) {
@@ -57,13 +45,7 @@ export default class Api {
         name: name,
         link: link
       })
-    }).then(response => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        return Promise.reject(`Error: ${response.status}`);
-      }
-    });
+    }).then(res => this._getResponseData(res));
   }
 
   removeUserCard = cardId => {
@@ -73,13 +55,7 @@ export default class Api {
         authorization: this._token,
         'content-type': 'application/json'
       }
-    }).then(response => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        return Promise.reject(`Error: ${response.status}`);
-      }
-    });
+    }).then(res => this._getResponseData(res));
   };
 
   addLike = cardId => {
@@ -89,13 +65,7 @@ export default class Api {
         authorization: this._token,
         'content-type': 'application/json'
       }
-    }).then(response => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        return Promise.reject(`Error: ${response.status}`);
-      }
-    });
+    }).then(res => this._getResponseData(res));
   };
 
   removeLike = cardId => {
@@ -105,13 +75,7 @@ export default class Api {
         authorization: this._token,
         'content-type': 'application/json'
       }
-    }).then(response => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        return Promise.reject(`Error: ${response.status}`);
-      }
-    });
+    }).then(res => this._getResponseData(res));
   };
 
   editAvatar = avatar => {
@@ -122,12 +86,13 @@ export default class Api {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({avatar})
-    }).then(response => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        return Promise.reject(`Error: ${response.status}`);
-      }
-    });
+    }).then(res => this._getResponseData(res));
   };
+
+  _getResponseData(res) {
+    if (!res.ok) {
+      return Promise.reject(`Error: ${res.status}`);
+    }
+    return res.json();
+  }
 }

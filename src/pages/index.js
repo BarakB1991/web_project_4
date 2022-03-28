@@ -1,4 +1,4 @@
-import '../../pages/index.css';
+import './index.css';
 import FormValidator from '../components/FormValidator.js';
 import Card from '../components/Card.js';
 import Section from '../components/Section.js';
@@ -22,7 +22,7 @@ import {
   formSettings
 } from '../utils/constants.js';
 import UserInfo from '../components/UserInfo.js';
-import Api from '../components/Api.js';
+import Api from '../utils/Api.js';
 
 const userInfo = new UserInfo({
   userName: profileName,
@@ -41,6 +41,11 @@ confirmationPopup.setEventListeners();
 
 const imagePopupWindow = new PopupWithImage('.popup_type_image');
 
+function fillProfileForm() {
+  const {userName, userAbout} = userInfo.getUserInfo(); // get object of current name and profession
+  nameInput.value = userName;
+  professionInput.value = userAbout;
+}
 // Initialize  cards
 function renderCard(item) {
   const newCard = new Card({
@@ -50,16 +55,16 @@ function renderCard(item) {
     userId: profileContainer.id,
     handleDeleteCardClick: id => {
       confirmationPopup.open();
-      confirmationPopup.submitHandler(() => {
+      confirmationPopup.setSubmitHandler(() => {
+        confirmationPopup.renderLoadingOnButton();
         api
           .removeUserCard(id)
-          .then(confirmationPopup.renderLoadingOnButton())
           .then(() => {
             newCard.removeCardElement();
+            confirmationPopup.close();
           })
           .catch(err => console.log(err))
           .finally(() => {
-            confirmationPopup.close();
             confirmationPopup.removeLoadingOnButton();
           });
       });
@@ -67,9 +72,15 @@ function renderCard(item) {
     handleLikeCardClick: id => {
       const isLikedByUser = newCard.isLikedByUser();
       if (isLikedByUser == true) {
-        api.removeLike(id).then(card => newCard.updateLikeCounter(card));
+        api
+          .removeLike(id)
+          .then(card => newCard.updateLikeCounter(card))
+          .catch(err => console.log(err));
       } else {
-        api.addLike(id).then(card => newCard.updateLikeCounter(card));
+        api
+          .addLike(id)
+          .then(card => newCard.updateLikeCounter(card))
+          .catch(err => console.log(err));
       }
     }
   });
@@ -84,10 +95,15 @@ const cardSection = new Section('.cards__list', {
 
 const profilePopupWindow = new PopupWithForm('.popup_type_edit-profile', async ({name: userName, profession: userAbout}) => {
   profilePopupWindow.renderLoadingOnButton();
-  const promiseInfo = await api.editProfile(userName, userAbout);
-  if (Promise.resolve(promiseInfo)) {
-    userInfo.setUserInfo({userName, userAbout});
-    profilePopupWindow.close();
+  try {
+    const getuserInfo = await api.editProfile(userName, userAbout);
+    if (getuserInfo) {
+      userInfo.setUserInfo({userName, userAbout});
+      profilePopupWindow.close();
+      profilePopupWindow.removeLoadingOnButton();
+    }
+  } catch (error) {
+    console.log(`Could not perform request: ${error}`);
     profilePopupWindow.removeLoadingOnButton();
   }
 });
@@ -95,10 +111,15 @@ const profilePopupWindow = new PopupWithForm('.popup_type_edit-profile', async (
 const addCardPopupWindow = new PopupWithForm('.popup_type_add-card', async data => {
   const {cardtitle: name, imagelink: link} = data;
   addCardPopupWindow.renderLoadingOnButton();
-  const card = await api.addNewCard(name, link);
-  if (card) {
-    renderCard(card);
-    addCardPopupWindow.close();
+  try {
+    const card = await api.addNewCard(name, link);
+    if (card) {
+      renderCard(card);
+      addCardPopupWindow.close();
+      addCardPopupWindow.removeLoadingOnButton();
+    }
+  } catch (error) {
+    console.log(`Could not perform request: ${error}`);
     addCardPopupWindow.removeLoadingOnButton();
   }
 });
@@ -106,13 +127,16 @@ const addCardPopupWindow = new PopupWithForm('.popup_type_add-card', async data 
 const editAvatarPopupWindow = new PopupWithForm('.popup_type_edit-avatar', async avatar => {
   const {avatar: avatarUrl} = avatar;
   editAvatarPopupWindow.renderLoadingOnButton();
-  const sendAvatar = await api.editAvatar(avatarUrl);
-  if (Promise.resolve(sendAvatar)) {
-    userInfo.setUserAvatar(avatarUrl);
-    editAvatarPopupWindow.close();
+  try {
+    const sendAvatar = await api.editAvatar(avatarUrl);
+    if (sendAvatar) {
+      userInfo.setUserAvatar(avatarUrl);
+      editAvatarPopupWindow.close();
+      editAvatarPopupWindow.removeLoadingOnButton();
+    }
+  } catch (error) {
+    console.log(`Could not perform request: ${error}`);
     editAvatarPopupWindow.removeLoadingOnButton();
-  } else {
-    console.log(Promise.reject(sendAvatar));
   }
 });
 
@@ -131,9 +155,8 @@ profileAvatarButton.addEventListener('click', () => {
 
 profileEditButton.addEventListener('click', () => {
   profilePopupWindow.open();
-  const {userName, userAbout} = userInfo.getUserInfo(); // get object of current name and profession
-  nameInput.value = userName;
-  professionInput.value = userAbout;
+  fillProfileForm();
+  profileFormValidator.resetValidation();
 });
 
 profileAddCardFormButton.addEventListener('click', () => {
@@ -146,7 +169,7 @@ profileFormValidator.enableValidation();
 avatarFormValidator.enableValidation();
 
 api
-  .promiseCardsAndUserData()
+  .getCardsAndUserData()
   .then(([userData, cards]) => {
     userInfo.setUserInfo({
       userName: userData.name,
