@@ -95,48 +95,47 @@ const cardSection = new Section('.cards__list', {
 const profilePopupWindow = new PopupWithForm('.popup_type_edit-profile', async ({name: userName, profession: userAbout}) => {
   profilePopupWindow.renderLoadingOnButton();
   try {
-    const getuserInfo = await api.editProfile(userName, userAbout);
-    if (getuserInfo) {
+    const response = await api.editProfile(userName, userAbout);
+    if (response) {
       userInfo.setUserInfo({userName, userAbout});
       profilePopupWindow.close();
-      profilePopupWindow.removeLoadingOnButton();
     }
   } catch (error) {
     console.log(`Could not perform request: ${error}`);
-    profilePopupWindow.removeLoadingOnButton();
   }
+  profilePopupWindow.removeLoadingOnButton();
 });
 
 const addCardPopupWindow = new PopupWithForm('.popup_type_add-card', async data => {
   const {cardtitle: name, imagelink: link} = data;
   addCardPopupWindow.renderLoadingOnButton();
   try {
-    const card = await api.addNewCard(name, link);
-    if (card) {
-      renderCard(card);
+    const response = await api.addNewCard(name, link);
+    if (response) {
+      renderCard(response);
       addCardPopupWindow.close();
       addCardPopupWindow.removeLoadingOnButton();
     }
   } catch (error) {
     console.log(`Could not perform request: ${error}`);
-    addCardPopupWindow.removeLoadingOnButton();
   }
+  addCardPopupWindow.removeLoadingOnButton();
 });
 
 const editAvatarPopupWindow = new PopupWithForm('.popup_type_edit-avatar', async avatar => {
   const {avatar: avatarUrl} = avatar;
   editAvatarPopupWindow.renderLoadingOnButton();
   try {
-    const sendAvatar = await api.editAvatar(avatarUrl);
-    if (sendAvatar) {
+    const response = await api.editAvatar(avatarUrl);
+    if (response) {
       userInfo.setUserAvatar(avatarUrl);
       editAvatarPopupWindow.close();
       editAvatarPopupWindow.removeLoadingOnButton();
     }
   } catch (error) {
     console.log(`Could not perform request: ${error}`);
-    editAvatarPopupWindow.removeLoadingOnButton();
   }
+  editAvatarPopupWindow.removeLoadingOnButton();
 });
 
 profilePopupWindow.setEventListeners();
